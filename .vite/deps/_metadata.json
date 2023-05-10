@@ -1,0 +1,47 @@
+{
+  "hash": "d4101096",
+  "browserHash": "42697fff",
+  "optimized": {
+    "alpinejs": {
+      "src": "../../node_modules/alpinejs/dist/module.esm.js",
+      "file": "alpinejs.js",
+      "fileHash": "4a19696a",
+      "needsInterop": false
+    },
+    "@alpinejs/focus": {
+      "src": "../../node_modules/@alpinejs/focus/dist/module.esm.js",
+      "file": "@alpinejs_focus.js",
+      "fileHash": "3653f13b",
+      "needsInterop": false
+    },
+    "@awcodes/alpine-floating-ui": {
+      "src": "../../node_modules/@awcodes/alpine-floating-ui/dist/module.esm.js",
+      "file": "@awcodes_alpine-floating-ui.js",
+      "fileHash": "3699d4ab",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "2c175a53",
+      "needsInterop": false
+    },
+    "laravel-echo": {
+      "src": "../../node_modules/laravel-echo/dist/echo.js",
+      "file": "laravel-echo.js",
+      "fileHash": "817ad967",
+      "needsInterop": false
+    },
+    "pusher-js": {
+      "src": "../../node_modules/pusher-js/dist/web/pusher.js",
+      "file": "pusher-js.js",
+      "fileHash": "28f60d18",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-RSJERJUL": {
+      "file": "chunk-RSJERJUL.js"
+    }
+  }
+}
