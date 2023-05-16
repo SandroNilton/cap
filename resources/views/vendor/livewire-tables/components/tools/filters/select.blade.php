@@ -15,7 +15,7 @@
                 wire:model.stop="{{ $tableName }}.filters.{{ $filter->getKey() }}"
                 wire:key="{{ $tableName }}-filter-{{ $filter->getKey() }}@if($filter->hasCustomPosition())-{{ $filter->getCustomPosition() }}@endif"
                 id="{{ $tableName }}-filter-{{ $filter->getKey() }}@if($filter->hasCustomPosition())-{{ $filter->getCustomPosition() }}@endif"
-                class="py-1.5 block w-full text-sm rounded shadow-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 cursor-pointer focus:border-[#42a692] focus:outline-none focus:ring-0 ease-in-out dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                class="py-1.5 block w-full text-sm rounded shadow-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 cursor-pointer focus:border-[#42a692] focus:outline-none focus:ring-0 ease-in-out"
             >
                 @foreach($filter->getOptions() as $key => $value)
                     @if (is_iterable($value))

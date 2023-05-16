@@ -43,7 +43,7 @@ class AreaTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setHideBulkActionsWhenEmptyStatus(true);
         $this->setBulkActions([
-          'exportSelected' => 'Export',
+          'exportSelected' => 'Exportar',
         ]);
         $this->setBulkActionsEnabled();
     }
@@ -107,5 +107,10 @@ class AreaTable extends DataTableComponent
                   fn($row, Column $column) => view('admin.areas.actions')->withRow($row)
                 ),
         ];
+    }
+
+    public function builder(): Builder
+    {
+        return Area::query()->orderBy('created_at', 'desc');
     }
 }

@@ -8,7 +8,7 @@
 @if ($theme === 'tailwind')
     <tr {{ $attributes
         ->merge($customAttributes)
-        ->class(['bg-white dark:bg-gray-700 dark:text-white' => $customAttributes['default'] ?? true])
+        ->class(['bg-white' => $customAttributes['default'] ?? true])
         ->except('default')
     }}>
         {{ $slot }}

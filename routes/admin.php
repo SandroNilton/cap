@@ -22,7 +22,7 @@ use App\Http\Controllers\Admin\CustomerController;
 */
 
 Route::get('/', function() { return view('admin.dashboard'); })->name('dashboard');
-Route::get('/dashboard', function() { return view('admin.dashboard.index'); })->middleware('can:admin.dashboard')->name('dashboard');
+Route::get('/dashboard', function() { return view('admin.dashboard'); })->middleware('can:admin.dashboard.index')->name('dashboard');
 Route::resource('users', UserController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('categories', CategoryController::class);

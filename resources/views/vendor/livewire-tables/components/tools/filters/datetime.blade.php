@@ -18,7 +18,7 @@
                 type="datetime-local"
                 @if($filter->hasConfig('min')) min="{{ $filter->getConfig('min') }}" @endif
                 @if($filter->hasConfig('max')) max="{{ $filter->getConfig('max') }}" @endif
-                class="py-1.5 text-sm rounded block w-full border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:ring-0 cursor-pointer ease-in-out dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                class="py-1.5 text-sm rounded block w-full border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:ring-0 cursor-pointer ease-in-out"
             />
         </div>
     @elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')

@@ -24,7 +24,7 @@
     @if ($theme === 'tailwind')
         <tr
             wire:key="row-{{ $rowIndex }}-collapsed-contents"
-            wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"
+            wire:loading.class.delay="opacity-50"
             x-data
             @toggle-row-content.window="$event.detail.row === {{ $rowIndex }} ? $el.classList.toggle('hidden') : null"
             class="hidden md:hidden bg-white dark:bg-gray-700 dark:text-white"

@@ -9,7 +9,7 @@
 
 @if ($theme === 'tailwind')
     <tr
-        wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"
+        wire:loading.class.delay="opacity-50"
 
         @if ($component->reorderIsEnabled() && $component->currentlyReorderingIsEnabled())
             wire:sortable.item="{{ $row->getKey() }}"
@@ -17,8 +17,8 @@
 
         {{
             $attributes->merge($customAttributes)
-                ->class(['bg-white dark:bg-gray-700 dark:text-white' => ($customAttributes['default'] ?? true) && $rowIndex % 2 === 0])
-                ->class(['bg-gray-50 dark:bg-gray-800 dark:text-white' => ($customAttributes['default'] ?? true) && $rowIndex % 2 !== 0])
+                ->class(['bg-white' => ($customAttributes['default'] ?? true) && $rowIndex % 2 === 0])
+                ->class(['bg-gray-50' => ($customAttributes['default'] ?? true) && $rowIndex % 2 !== 0])
                 ->class(['cursor-pointer' => $component->hasTableRowUrl()])
                 ->except('default')
         }}

@@ -14,7 +14,7 @@
     @if ($theme === 'tailwind')
         <x-livewire-tables::table.tr.plain
             wire:key="bulk-select-message-{{ $table }}"
-            class="bg-indigo-50 dark:bg-gray-900 dark:text-white"
+            class="bg-indigo-50"
         >
             <x-livewire-tables::table.td.plain :colspan="$colspan">
                 @if ($selectAll)
@@ -29,7 +29,7 @@
                             wire:click="clearSelected"
                             wire:loading.attr="disabled"
                             type="button"
-                            class="ml-1 text-[#42a692] hover:text-[#2c6f62] text-sm leading-5 font-medium focus:outline-none focus:underline transition duration-150 ease-in-out dark:text-white dark:hover:text-gray-400"
+                            class="ml-1 text-[#42a692] hover:text-[#2c6f62] text-sm leading-5 font-medium focus:outline-none focus:underline transition duration-150 ease-in-out"
                         >
                             @lang('Deseleccionar todo')
                         </button>
@@ -47,7 +47,7 @@
                             wire:click="setAllSelected"
                             wire:loading.attr="disabled"
                             type="button"
-                            class="ml-1 text-[#42a692] hover:text-[#2c6f62] text-sm leading-5 font-medium focus:outline-none focus:text-gray-800 focus:underline transition duration-150 ease-in-out dark:text-white dark:hover:text-gray-400"
+                            class="ml-1 text-[#42a692] hover:text-[#2c6f62] text-sm leading-5 font-medium focus:outline-none focus:text-gray-800 focus:underline transition duration-150 ease-in-out"
                         >
                             @lang('Seleccionar todo')
                         </button>
@@ -56,7 +56,7 @@
                             wire:click="clearSelected"
                             wire:loading.attr="disabled"
                             type="button"
-                            class="ml-1 text-[#42a692] hover:text-[#2c6f62] text-sm leading-5 font-medium focus:outline-none focus:text-gray-800 focus:underline transition duration-150 ease-in-out dark:text-white dark:hover:text-gray-400"
+                            class="ml-1 text-[#42a692] hover:text-[#2c6f62] text-sm leading-5 font-medium focus:outline-none focus:text-gray-800 focus:underline transition duration-150 ease-in-out"
                         >
                             @lang('Deseleccionar todo')
                         </button>

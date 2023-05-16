@@ -53,7 +53,7 @@ class ProcedureController extends Controller
      */
     public function edit(Procedure $procedure)
     {
-        //
+        return view('admin.procedures.edit');
     }
 
     /**

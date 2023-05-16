@@ -19,7 +19,7 @@
                 <button
                     wire:click="{{ $component->currentlyReorderingIsEnabled() ? 'disableReordering' : 'enableReordering' }}"
                     type="button"
-                    class="inline-flex justify-center items-center w-full md:w-auto px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600"
+                    class="inline-flex justify-center items-center w-full md:w-auto px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                 >
                     @if ($component->currentlyReorderingIsEnabled())
                         @lang('Done Reordering')
@@ -32,11 +32,11 @@
             @if ($component->searchIsEnabled() && $component->searchVisibilityIsEnabled())
                 <div class="flex rounded shadow-sm">
                     <input wire:model{{ $component->getSearchOptions() }}="{{ $component->getTableName() }}.search" placeholder="{{ __('Buscar') }}"
-                        type="text" class="block w-full py-1.5 border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 rounded shadow-sm ease-in-out sm:text-sm sm:leading-5 dark:bg-gray-700 dark:text-white dark:border-gray-600 @if ($component->hasSearch()) rounded-none rounded-l focus:ring-0 focus:border-gray-300 @else focus:border-[#42a692] focus:ring focus:ring-0 focus:ring-opacity-50 rounded @endif"
+                        type="text" class="block w-full py-1.5 border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 rounded shadow-sm ease-in-out sm:text-sm sm:leading-5 @if ($component->hasSearch()) rounded-none rounded-l focus:ring-0 focus:border-gray-300 @else focus:border-[#42a692] focus:ring focus:ring-0 focus:ring-opacity-50 rounded @endif"
                     />
 
                     @if ($component->hasSearch())
-                        <span wire:click.prevent="clearSearch" class="inline-flex items-center px-3 text-gray-500 bg-gray-50 rounded-r border border-l-0 border-gray-300 cursor-pointer sm:text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600">
+                        <span wire:click.prevent="clearSearch" class="inline-flex items-center px-3 text-gray-500 bg-gray-50 rounded-r border border-l-0 border-gray-300 cursor-pointer sm:text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -58,7 +58,7 @@
                     <div>
                         <button
                             type="button"
-                            class="inline-flex py-1.5 justify-center w-full rounded border border-[#cfd7df] shadow-sm px-4 bg-white text-sm text-[#212529] hover:bg-gray-50 hover:border-[#42a692] focus:border-[#42a692] transition duration-300 focus:ring focus:ring-0 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600"
+                            class="inline-flex py-1.5 justify-center w-full rounded border border-[#cfd7df] shadow-sm px-4 bg-white text-sm text-[#212529] hover:bg-gray-50 hover:border-[#42a692] focus:border-[#42a692] transition duration-300 focus:ring-0"
 
                             @if ($component->isFilterLayoutPopover())
                                 x-on:click="open = !open"
@@ -74,7 +74,7 @@
                             @lang('Filtros')
 
                             @if ($count = $component->getFilterBadgeCount())
-                                <span class="ml-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-indigo-100 text-indigo-800 capitalize dark:bg-indigo-200 dark:text-indigo-900">
+                                <span class="ml-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-indigo-100 text-indigo-800 capitalize">
                                     {{ $count }}
                                 </span>
                             @endif
@@ -97,7 +97,7 @@
                             x-transition:leave="transition ease-in duration-75"
                             x-transition:leave-start="transform opacity-100 scale-100"
                             x-transition:leave-end="transform opacity-0 scale-95"
-                            class="origin-top-left absolute left-0 mt-2 w-full md:w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-50 dark:bg-gray-700 dark:text-white dark:divide-gray-600"
+                            class="origin-top-left absolute left-0 mt-2 w-full md:w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-50"
                             role="menu"
                             aria-orientation="vertical"
                             aria-labelledby="filters-menu"
@@ -112,12 +112,12 @@
                             @endforeach
 
                             @if ($component->hasAppliedVisibleFiltersWithValuesThatCanBeCleared())
-                                <div class="block px-4 py-3 text-sm text-gray-700 dark:text-white" role="menuitem">
+                                <div class="block px-4 py-3 text-sm text-gray-700" role="menuitem">
                                     <button
                                         wire:click.prevent="setFilterDefaults"
                                         x-on:click="open = false"
                                         type="button"
-                                        class="w-full inline-flex items-center justify-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:hover:border-gray-500"
+                                        class="w-full inline-flex items-center justify-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                     >
                                         @lang('Limpiar')
                                     </button>
@@ -151,7 +151,7 @@
                                 <button
                                     x-on:click="open = !open"
                                     type="button"
-                                    class="inline-flex justify-center w-full rounded border border-gray-300 shadow-sm px-3 py-1.5 bg-white text-sm text-[#212529] hover:bg-gray-50 focus:border-transparentfocus:ring focus:ring-transparent focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600"
+                                    class="inline-flex justify-center w-full rounded border border-gray-300 shadow-sm px-3 py-1.5 bg-white text-sm text-[#212529] hover:bg-gray-50 focus:border-transparentfocus:ring focus:ring-transparent focus:ring-opacity-50"
                                     aria-haspopup="true"
                                     x-bind:aria-expanded="open"
                                     aria-expanded="true"
@@ -176,14 +176,14 @@
                             x-transition:leave-end="transform opacity-0 scale-95"
                             class="origin-top-right absolute right-0 mt-1 w-full md:w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-50"
                         >
-                            <div class="rounded bg-white shadow-xs dark:bg-gray-700 dark:text-white">
+                            <div class="rounded bg-white shadow-xs">
                                 <div class="py-1" role="menu" aria-orientation="vertical">
                                     @foreach($component->getBulkActions() as $action => $title)
                                         <button
                                             wire:click="{{ $action }}"
                                             wire:key="bulk-action-{{ $action }}-{{ $component->getTableName() }}"
                                             type="button"
-                                            class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 flex items-center space-x-2 dark:text-white dark:hover:bg-gray-600"
+                                            class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 flex items-center space-x-2"
                                             role="menuitem"
                                         >
                                             <span>{{ $title }}</span>
@@ -210,7 +210,7 @@
                                 <button
                                     x-on:click="open = !open"
                                     type="button"
-                                    class="inline-flex justify-center px-3 py-1.5 w-full text-sm font-normal text-gray-700 bg-white rounded border border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 shadow-sm hover:bg-gray-50 focus:ring dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600"
+                                    class="inline-flex justify-center px-3 py-1.5 w-full text-sm font-normal text-gray-700 bg-white rounded border border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 shadow-sm hover:bg-gray-50"
                                     aria-haspopup="true"
                                     x-bind:aria-expanded="open"
                                     aria-expanded="true"
@@ -235,7 +235,7 @@
                             x-transition:leave-end="transform opacity-0 scale-95"
                             class="absolute right-0 z-50 mt-2 w-full bg-white rounded-md divide-y divide-gray-100 ring-1 ring-black ring-opacity-5 shadow-lg origin-top-right md:w-48 focus:outline-none"
                         >
-                            <div class="bg-white rounded shadow-xs dark:bg-gray-700 dark:text-white text-sm">
+                            <div class="bg-white rounded shadow-xs text-sm">
                                 <div class="p-2" role="menu" aria-orientation="vertical" aria-labelledby="column-select-menu">
                                     <div>
                                         <label
@@ -243,7 +243,7 @@
                                             class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"
                                         >
                                             <input
-                                                class="border-[#cfd7df] hover:border-[#42a692] transition duration-300 text-[#42a692] cursor-pointer ease-in-out rounded shadow-sm focus:border-[#42a692] focus:ring focus:ring-0 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"
+                                                class="border-[#cfd7df] hover:border-[#42a692] transition duration-300 text-[#42a692] cursor-pointer ease-in-out rounded shadow-sm focus:border-[#42a692] focus:ring-0 disabled:opacity-50 disabled:cursor-wait"
                                                 @if($component->allDefaultVisibleColumnsAreSelected())
                                                     checked
                                                     wire:click="deselectAllColumns"
@@ -266,7 +266,7 @@
                                                     class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"
                                                 >
                                                     <input
-                                                        class="border-[#cfd7df] hover:border-[#42a692] transition duration-300 text-[#42a692] cursor-pointer rounded shadow-sm ease-in-out focus:border-[#42a692] focus:ring focus:ring-0 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"
+                                                        class="border-[#cfd7df] hover:border-[#42a692] transition duration-300 text-[#42a692] cursor-pointer rounded shadow-sm ease-in-out focus:border-[#42a692] focus:ring-0  disabled:opacity-50 disabled:cursor-wait"
                                                         wire:model="selectedColumns"
                                                         wire:target="selectedColumns"
                                                         wire:loading.attr="disabled"
@@ -290,7 +290,7 @@
                     <select
                         wire:model="perPage"
                         id="perPage"
-                        class="block w-full hover:bg-gray-100 border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 py-1.5 rounded shadow-sm ease-in-out sm:text-sm sm:leading-5 cursor-pointer dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                        class="block w-full hover:bg-gray-100 border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 py-1.5 rounded shadow-sm ease-in-out sm:text-sm sm:leading-5 cursor-pointer"
                     >
                         @foreach ($component->getPerPageAccepted() as $item)
                             <option value="{{ $item }}" wire:key="per-page-{{ $item }}-{{ $component->getTableName() }}">{{ $item === -1 ? __('All') : $item }}</option>

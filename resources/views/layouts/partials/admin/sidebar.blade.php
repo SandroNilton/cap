@@ -9,6 +9,7 @@
         </span>
         <span :class="{'lg:hidden': !isSidebarOpen}">
           <img src="https://datalicencias.limacap.org/static/img/logo_cap.png" class="" loading="lazy"/>
+          <!--<img src="https://cap.org.pe/wp-content/uploads/2022/08/logo-en-blanco.png" class="" loading="lazy"/>-->
         </span>
       </a>
     </span>

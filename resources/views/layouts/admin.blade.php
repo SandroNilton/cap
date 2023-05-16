@@ -95,6 +95,7 @@
               {{ $slot }}
             </main>
           </div>
+          @include('layouts.partials.admin.setting')
         </div>
       </div>
     </div>

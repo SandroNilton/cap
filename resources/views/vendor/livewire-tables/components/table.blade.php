@@ -14,12 +14,12 @@
 @if ($theme === 'tailwind')
     <div {{
         $attributes->merge($customAttributes['wrapper'])
-            ->class(['shadow overflow-y-scroll dark:border-gray-700 rounded' => $customAttributes['wrapper']['default'] ?? true])
+            ->class(['shadow overflow-y-scroll rounded scrollbar' => $customAttributes['wrapper']['default'] ?? true])
             ->except('default')
     }}>
         <table {{
             $attributes->merge($customAttributes['table'])
-                ->class(['min-w-full divide-y divide-gray-200 dark:divide-none' => $customAttributes['table']['default'] ?? true])
+                ->class(['min-w-full divide-y divide-gray-200' => $customAttributes['table']['default'] ?? true])
                 ->except('default')
         }}>
             <thead {{
@@ -38,7 +38,7 @@
 
                 {{
                     $attributes->merge($customAttributes['tbody'])
-                        ->class(['bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-none' => $customAttributes['tbody']['default'] ?? true])
+                        ->class(['bg-white divide-y divide-gray-200' => $customAttributes['tbody']['default'] ?? true])
                         ->except('default')
                 }}
             >

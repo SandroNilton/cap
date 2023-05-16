@@ -103,4 +103,9 @@ class RequirementTable extends DataTableComponent
                 ),
         ];
     }
+
+    public function builder(): Builder
+    {
+        return Requirement::query()->orderBy('created_at', 'desc');
+    }
 }

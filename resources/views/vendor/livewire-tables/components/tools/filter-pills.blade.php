@@ -8,7 +8,7 @@
     <div>
         @if ($component->filtersAreEnabled() && $component->filterPillsAreEnabled() && $component->hasAppliedVisibleFiltersForPills())
             <div class="mb-4 px-4 md:p-0">
-                <small class="text-gray-700 dark:text-white">@lang('Filtros aplicados'):</small>
+                <small class="text-gray-700">@lang('Filtros aplicados'):</small>
 
                 @foreach($component->getAppliedFiltersWithValues() as $filterSelectName => $value)
                     @php
@@ -22,7 +22,7 @@
                     @else
                         <span
                             wire:key="{{ $component->getTableName() }}-filter-pill-{{ $filter->getKey() }}"
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-[#42a692] text-white capitalize dark:bg-indigo-200 dark:text-indigo-900"
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-[#42a692] text-white capitalize"
                         >
                             {{ $filter->getFilterPillTitle() }}: {{ $filter->getFilterPillValue($value) }}
 

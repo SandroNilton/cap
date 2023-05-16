@@ -103,4 +103,9 @@ class CategoryTable extends DataTableComponent
                 ),
         ];
     }
+
+    public function builder(): Builder
+    {
+        return Category::query()->orderBy('created_at', 'desc');
+    }
 }

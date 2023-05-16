@@ -6,7 +6,8 @@
     <div class="bg-white w-full md:max-w-md lg:max-w-full md:mw-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center overflow-hidden overflow-y-scroll">
       <div class="w-full h-100 px-4">
         <div class="justify-center flex">
-          <img src="https://i.postimg.cc/PqDTPv8d/logo-niubiz-removebg-preview-3.png" width="240" alt="">
+          <!--<img src="https://i.postimg.cc/PqDTPv8d/logo-niubiz-removebg-preview-3.png" width="240" alt="">-->
+          <img src="https://cap.org.pe/wp-content/uploads/2022/12/Logo-clasico-2022-Curvas.png" width="240" alt="">
         </div>
         @if (session('status'))
           <div class="mb-4 font-medium text-sm text-green-600">
