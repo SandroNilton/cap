@@ -1,11 +1,11 @@
 <div>
-  <div class="flex flex-wrap -mx-2 mb-8">
+  <div class="flex flex-wrap -mx-2">
     <div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
       <div class="bg-white rounded p-4 mb-4">
         <div class="flex items-center gap-x-3 mb-2">
           <p class="text-sm font-poppins text-gray-600">Trámite:</p>
-          <span class="px-3 py-1 text-xs text-white bg-[#42a692] rounded-sm">N° {{ $procedure->id }}</span>
-          @if ($procedure->administrator_id == "" || $procedure->administrator_id == NULL)  
+          <span class="px-3 py-1 text-xs text-white bg-[#42a692] rounded-sm">N° {{ $procedure_data[0]->id }}</span>
+          @if ($procedure_data[0]->administrator_id == "" || $procedure_data[0]->administrator_id == NULL)  
             @if (Auth::user()->can('admin.procedures.assign_me'))
               @can('admin.procedures.assign_me')
                 <a class="rounded-sm text-sm py-0.5 cursor-pointer" wire:click="assignme({{ $procedure->id }})" title="Tomar trámite">
@@ -19,13 +19,13 @@
               <div>sin asignar</div>
             @endif
           @else
-            <div>{{ $procedure->administrator->name }}</div>
+            <div>{{ $procedure_data[0]->administrator->name }}</div>
           @endif
         </div>
         <div class="py-2">
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Fecha de creación:</span>
-            <span>{{ $procedure->created_at->format('d/m/Y h:i') }}</span>
+            <span>{{ $procedure_data[0]->created_at->format('d/m/Y h:i') }}</span>
           </div>
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Tipo de trámite:</span>
@@ -33,7 +33,7 @@
           </div>
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Área:</span>
-            <span>{{ $procedure->area->name }}</span>
+            <span>{{ $procedure_data[0]->area->name }}</span>
           </div>
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Tipo usuario:</span>
@@ -72,15 +72,23 @@
       </div>
       <div class="bg-white rounded p-4 mb-4">
         <div class="items-center">
-          <p class="text-sm font-poppins text-gray-600 mb-3">Agregar comentarios: @error('message') <span class="text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</strong> @enderror</p>
+          <p class="text-sm font-poppins text-gray-600 mb-3">Agregar comentarios: @error('message') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
           <div class="flex text-sm mb-3">
             <form wire:submit.prevent="addMessage" class="flex w-full gap-x-3">
+              <div wire:loading wire:target="addMessage">
+                <div class="flex justify-center items-center h-full">
+                  <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
+                    <path class="fill-gray-200" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
+                    <path class="fill-[#42a692]" d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                  </svg>
+                </div>
+              </div>
               <input type="text" wire:model="message" name="message" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('message')) border-[#d72d30] @endif" placeholder="Ingrese un mensaje"/>
               <button type="submit" class="bg-[#42a692] px-2 rounded text-white text-sm py-1 hover:bg-[#2c6f62] transition duration-300"">Enviar</button>
             </form>
           </div>
           <hr>
-          <div class="mt-3 overflow-y-scroll scrollbar">
+          <div class="mt-3 overflow-y-scroll scrollbar h-48">
             @forelse ($procedure_messages as $procedure_message)
               <div class="group flex items-center gap-x-3 mb-2">                
                 <div class="transform relative flex items-center p-3 bg-[#42a692] text-white rounded flex-col md:flex-row space-y-4 md:space-y-0">
@@ -105,14 +113,25 @@
       @can('admin.procedures.assign_area')
         <div class="bg-white rounded p-4 mb-4">
           <div class="items-center">
-            <p class="text-sm font-poppins text-gray-600 mb-3">Asignar trámite a otra área:</p>
+            <p class="text-sm font-poppins text-gray-600 mb-3">Asignar trámite a otra área: @error('area_id') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
             <div class="flex text-sm gap-x-3">
-              <select class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
-                @foreach ($areas as $area)
-                  <option value="{{ $area->id }}">{{ $area->name }}</option>
-                @endforeach
-              </select>
-              <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1 hover:bg-[#2c6f62] transition duration-300">Asignar</button>
+              <form wire:submit.prevent="changeArea" class="flex w-full gap-x-3">
+                <div wire:loading wire:target="changeArea">
+                  <div class="flex justify-center items-center h-full">
+                    <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
+                      <path class="fill-gray-200" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
+                      <path class="fill-[#42a692]" d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <select wire:model="area_id" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('area_id')) border-[#d72d30] @endif">
+                  <option value="">Seleccione el area</option>
+                  @foreach ($areas as $area)
+                    <option value="{{ $area->id }}" selected>{{ $area->name }}</option>
+                  @endforeach
+                </select>
+                <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1 hover:bg-[#2c6f62] transition duration-300">Asignar</button>
+              </form>
             </div>
           </div>
         </div>
@@ -120,14 +139,25 @@
       @can('admin.procedures.assign_user')
         <div class="bg-white rounded p-4 mb-4">
           <div class="items-center">
-            <p class="text-sm font-poppins text-gray-600 mb-3">Asignar trámite a usuario:</p>
+            <p class="text-sm font-poppins text-gray-600 mb-3">Asignar trámite a usuario: @error('user_id') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
             <div class="flex text-sm gap-x-3">
-              <select class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
-                @foreach ($users as $user)
-                  <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
-                @endforeach
-              </select>
-              <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1 hover:bg-[#2c6f62] transition duration-300">Asignar</button>
+              <form wire:submit.prevent="assignUser" class="flex w-full gap-x-3">
+                <div wire:loading wire:target="assignUser">
+                  <div class="flex justify-center items-center h-full">
+                    <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
+                      <path class="fill-gray-200" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
+                      <path class="fill-[#42a692]" d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <select wire:model="user_id" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('user_id')) border-[#d72d30] @endif">
+                  <option value="">Seleccione el usuario</option>
+                  @foreach ($users as $user)
+                    <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                  @endforeach
+                </select>
+                <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1 hover:bg-[#2c6f62] transition duration-300">Asignar</button>
+              </form>
             </div>
           </div>
         </div>
@@ -172,7 +202,7 @@
         </div>
       </div>
     </div>
-    <div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
+    <div class="w-full md:w-1/2 lg:w-1/3 px-2">
       <div class="bg-white rounded p-4">
         <div class="flex w-full flex-col scrollbar overflow-y-scroll">
           <div class="items-center">

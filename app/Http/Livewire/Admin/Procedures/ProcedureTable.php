@@ -102,11 +102,6 @@ class ProcedureTable extends DataTableComponent
             Column::make("Área", "area.name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Descripción", "description")
-                ->sortable()
-                ->format(
-                  fn($value, $row, Column $column) => ''. (!empty($row->description)) ? $row->description : '--' .''
-                ),
             Column::make('Usuario', 'administrator_id')
                 ->format(
                   fn($value, $row, Column $column) => view('admin.procedures.assign')->withRow($row)->withValue($value)

@@ -88,7 +88,7 @@
         @include('layouts.partials.admin.sidebar')
         <div class="flex flex-col flex-1 h-full overflow-hidden">
           @include('layouts.partials.admin.navigation')
-          <div class="max-h-full overflow-hidden overflow-y-scroll flex-1 bg-[#ebeff3]">
+          <div class="max-h-full overflow-y-scroll scrollbar flex-1 bg-[#ebeff3]">
             @stack('header-menu')
             <main class="p-3">
               <!-- Content -->
