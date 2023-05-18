@@ -7,6 +7,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script> 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style> [x-cloak] { display: none !important; } </style>
     @livewireStyles
@@ -16,6 +18,7 @@
     @php
       $links =  [
         [
+          'id' => 'panel-avanzado',
           'title' => 'Panel avanzado',
           'url' => route('admin.dashboard'),
           'active' => request()->routeIs('admin.dashboard'),
@@ -23,6 +26,7 @@
           'can' => 'admin.dashboard.index'
         ],
         [
+          'id' => 'tramites',
           'title' => 'Trámites',
           'url' => route('admin.procedures.index'),
           'active' => request()->routeIs('admin.procedures.index') or request()->routeIs('admin.procedures.edit'),
@@ -30,6 +34,7 @@
           'can' => 'admin.procedures.index'
         ],
         [
+          'id' => 'usuarios',
           'title' => 'Usuarios',
           'url' => route('admin.users.index'),
           'active' => request()->routeIs('admin.users.index'),
@@ -37,6 +42,7 @@
           'can' => 'admin.users.index' 
         ],
         [
+          'id' => 'clientes',
           'title' => 'Clientes',
           'url' => route('admin.customers.index'),
           'active' => request()->routeIs('admin.customers.index'),
@@ -44,6 +50,7 @@
           'can' => 'admin.customers.index'
         ],
         [
+          'id' => 'roles',
           'title' => 'Roles',
           'url' => route('admin.roles.index'),
           'active' => request()->routeIs('admin.roles.index'),
@@ -51,6 +58,7 @@
           'can' => 'admin.roles.index' 
         ],
         [
+          'id' => 'categorias',
           'title' => 'Categorias',
           'url' => route('admin.categories.index'),
           'active' => request()->routeIs('admin.categories.index'),
@@ -58,6 +66,7 @@
           'can' => 'admin.categories.index'
         ],
         [
+          'id' => 'areas',
           'title' => 'Areas',
           'url' => route('admin.areas.index'),
           'active' => request()->routeIs('admin.areas.index'),
@@ -65,6 +74,7 @@
           'can' => 'admin.areas.index'
         ],
         [
+          'id' => 'requisitos',
           'title' => 'Requisitos',
           'url' => route('admin.requirements.index'),
           'active' => request()->routeIs('admin.requirements.index'),
@@ -72,6 +82,7 @@
           'can' => 'admin.requirements.index'
         ],
         [
+          'id' => 'tipos-de-tramite',
           'title' => 'Tipos de tramite',
           'url' => route('admin.typeprocedures.index'),
           'active' => request()->routeIs('admin.typeprocedures.index'),

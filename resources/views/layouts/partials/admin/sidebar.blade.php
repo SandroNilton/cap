@@ -18,12 +18,12 @@
     <ul class="overflow-hidden px-1 mt-1">
       @foreach ($links as $link)
         @can($link['can'])
-          <li class="p-1">
-            <a href="{{ $link['url'] }}" class="flex items-center text-sm font-poppins px-1.5 py-1 space-x-2 px-2 rounded-sm {{ $link['active'] ? 'text-white bg-[#42a692] hover:bg-[#2c6f62] transition duration-300' : 'text-[#212529]' }}" :class="{'justify-center': !isSidebarOpen}" title="{{ $link['title'] }}">
-              <span>
-                <i data-feather="{{ $link['icon'] }}" ></i>
+          <li class="p-1 w-full" >
+            <a id="{{ $link['id'] }}" href="{{ $link['url'] }}" x-init="new tippy(`#{{ $link['id'] }}`, { content: `{{ $link['title'] }}`, arrow: true,placement: 'right' })" class="flex items-center text-sm font-poppins py-1 space-x-2 px-2 rounded-sm {{ $link['active'] ? 'text-white bg-[#42a692] hover:bg-[#2c6f62] transition duration-300' : 'text-[#212529]' }}" :class="{'justify-center': !isSidebarOpen}" title="{{ $link['title'] }}">
+              <span >
+                <i data-feather="{{ $link['icon'] }}"></i>
               </span>
-              <span :class="{ 'lg:hidden': !isSidebarOpen }">{{ $link['title'] }} </span>
+              <span :class="{ 'lg:hidden': !isSidebarOpen }"> {{ $link['title'] }} </span>
             </a>
           </li>
         @endcan
