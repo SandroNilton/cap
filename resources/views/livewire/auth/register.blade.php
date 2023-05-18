@@ -6,7 +6,7 @@
     <div class="bg-white w-full h-screen md:max-w-md lg:max-w-full md:mw-auto md:mx-0 md:w-1/2 xl:w-1/3 px-6 lg:px-16 xl:px-12 flex items-center justify-center overflow-y-scroll scrollbar">
       <div class="w-full px-4">
         <div class="justify-center flex mb-4">
-          <img src="https://i.postimg.cc/PqDTPv8d/logo-niubiz-removebg-preview-3.png" width="240" alt="">
+          <img src="https://i.postimg.cc/PqDTPv8d/logo-niubiz-removebg-preview-3.png" width=200" alt="">
           <!--<img src="https://cap.org.pe/wp-content/uploads/2022/12/Logo-clasico-2022-Curvas.png" width="240" alt="">-->
         </div>
         @if (session('status'))
@@ -36,7 +36,7 @@
               @if($selectTypeCode == 1)
                 <div class="mb-3">
                   <div class="flex gap-x-2">
-                    <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999999999999" placeholder="Número de documento" @required(true)>
+                    <input type="number" oninput="this.value|=0" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="8" placeholder="Número de documento" @required(true)>
                     <a id="numberDni" class="px-1.5 py-1.5 cursor-pointer bg-red-600 text-white self-center rounded">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
@@ -53,9 +53,8 @@
                 </div>
               @elseif ($selectTypeCode == 2)
                 <div class="mb-3">
-                  <label for="email" class="text-xs">Número de documento:</label>
                   <div class="flex gap-x-2">
-                    <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999999999999" placeholder="Número de documento" @required(true)>
+                    <input type="number" oninput="this.value|=0" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="22" placeholder="Número de documento" @required(true)>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -63,7 +62,7 @@
                 </div>
               @endif
               <div class="mb-3">
-                <input type="tel" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
+                <input type="tel" oninput="this.value|=0" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="9" placeholder="Número de teléfono" @required(true)>
               </div>
               <div class="mb-3">
                 <input type="email" id="email" name="email" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Correo electronico" @required(true)>
