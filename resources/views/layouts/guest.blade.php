@@ -13,6 +13,9 @@
     <!-- LivewireStyles -->
     @livewireStyles
     <!-- Stack CSS -->
+    <!-- Alpine Plugins -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.12.1/dist/cdn.min.js"></script>
+ 
     @stack('css')
   </head>
   <body class="font-sans text-[#212529] antialiased">
