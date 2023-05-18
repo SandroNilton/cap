@@ -36,7 +36,7 @@
               @if($selectTypeCode == 1)
                 <div class="mb-3">
                   <div class="flex gap-x-2">
-                    <input type="number" oninput="this.value|=0" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="8" placeholder="Número de documento" @required(true)>
+                    <input type="tel" oninput="this.value|=0" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="8" placeholder="Número de documento" @required(true)>
                     <a id="numberDni" class="px-1.5 py-1.5 cursor-pointer bg-red-600 text-white self-center rounded">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
@@ -54,7 +54,7 @@
               @elseif ($selectTypeCode == 2)
                 <div class="mb-3">
                   <div class="flex gap-x-2">
-                    <input type="number" oninput="this.value|=0" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="22" placeholder="Número de documento" @required(true)>
+                    <input type="tel" oninput="this.value|=0" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="22" placeholder="Número de documento" @required(true)>
                   </div>
                 </div>
                 <div class="mb-3">
