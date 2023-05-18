@@ -20,6 +20,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@alpinejs/mask": "^3.12.1",
         "apexcharts": "^3.40.0",
         "pikaday": "^1.8.2"
     }

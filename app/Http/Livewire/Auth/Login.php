@@ -11,8 +11,14 @@ class Login extends Component
     public $remember = false;
 
     protected $rules = [
-      'email' => 'required|email|exists:users,email',
-      'password' => 'required',
+        'email' => 'required|email',
+        'password' => 'required',
+    ];
+
+    protected $messages = [
+        'email.required' => 'El campo correo electrónico es obligatorio.',
+        'email.email' => 'El campo correo electrónico no es válido',
+        'password.required' => 'El campo contraseña es obligatorio.',
     ];
 
     public function updated($fields)

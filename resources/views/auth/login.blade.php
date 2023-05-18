@@ -1,3 +1,5 @@
 <x-guest-layout>
-  @livewire('auth.login')
+
+    @livewire('auth.login')
+
 </x-guest-layout>
