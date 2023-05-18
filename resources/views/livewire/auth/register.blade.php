@@ -3,8 +3,8 @@
     <div class="hidden md:block w-full md:w-1/2 xl:w-2/3 h-screen">
       @include('layouts.partials.guest.slide')
     </div>
-    <div class="bg-white w-full md:max-w-md lg:max-w-full md:mw-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center overflow-hidden overflow-y-scroll scrollbar">
-      <div class="w-full max-h-min p-4">
+    <div class="bg-white w-full h-screen md:max-w-md lg:max-w-full md:mw-auto md:mx-0 md:w-1/2 xl:w-1/3 px-6 lg:px-16 xl:px-12 flex items-center justify-center overflow-y-scroll scrollbar">
+      <div class="w-full px-4">
         <div class="justify-center flex mb-4">
           <img src="https://i.postimg.cc/PqDTPv8d/logo-niubiz-removebg-preview-3.png" width="240" alt="">
           <!--<img src="https://cap.org.pe/wp-content/uploads/2022/12/Logo-clasico-2022-Curvas.png" width="240" alt="">-->
@@ -14,9 +14,8 @@
             {{ session('status') }}
           </div>
         @endif
-        <div class="items-center mb-4">
-          <div class="text-sm mb-4">
-            <label for="email" class="text-sm">Tipo de usuario:</label>
+        <div class="items-center py-2 mb-2">
+          <div class="text-sm">
             <select wire:model="selectTypeuser" name="type" id="type" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
               <option value="">Seleccione tipo de usuario</option>
               <option value="1">Persona Natural</option>
@@ -27,8 +26,7 @@
           @if ($optionSelected == 1)
             <form method="POST" action="{{ route('register') }}" class="w-full">
               @csrf
-              <div class="mb-3">
-                <label for="email" class="text-sm">Tipo de documento:</label>
+              <div class="mb-3 mt-3">
                 <select wire:model="selectTypeCode" name="natural_type" id="natural_type" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" required>
                   <option value="">Seleccione tipo de documento</option>
                   <option value="1">DNI</option>
@@ -37,9 +35,8 @@
               </div>
               @if($selectTypeCode == 1)
                 <div class="mb-3">
-                  <label for="email" class="text-sm">Busqueda de documento:</label>
                   <div class="flex gap-x-2">
-                    <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999999999999" placeholder="Número de documento">
+                    <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999999999999" placeholder="Número de documento" @required(true)>
                     <a id="numberDni" class="px-1.5 py-1.5 cursor-pointer bg-red-600 text-white self-center rounded">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
@@ -58,16 +55,57 @@
                 <div class="mb-3">
                   <label for="email" class="text-xs">Número de documento:</label>
                   <div class="flex gap-x-2">
-                    <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999999999999" placeholder="Número de documento">
+                    <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999999999999" placeholder="Número de documento" @required(true)>
                   </div>
                 </div>
                 <div class="mb-3">
-                  <input type="text" id="name" name="name" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" @disabled(false)>
+                  <input type="text" id="name" name="name" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" @disabled(false) @required(true)>
                 </div>
               @endif
               <div class="mb-3">
-                <label for="phone" class="text-[#373435] text-xs font-poppins">Numero de telefono:</label>
-                <input type="text" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="">
+                <input type="tel" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
+              </div>
+              <div class="mb-3">
+                <input type="email" id="email" name="email" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Correo electronico" @required(true)>
+              </div>
+              <div class="mb-3">
+                <input type="password" id="password" name="password" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Contraseña" @required(true)>
+              </div>
+              <div class="mb-3">
+                <input type="password" id="password_confirmation" name="password_confirmation" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Confirmar contraseña" @required(true)>
+              </div>
+              <button type="submit" class="w-full font-extrabold bg-[#42a692] rounded text-white text-sm py-1.5 hover:bg-[#2c6f62] transition duration-300">Registrarse</button>
+            </form>
+          @elseif ($optionSelected == 2)
+            <form method="POST" action="{{ route('register') }}" class="space-y-1">
+              @csrf
+              <input id="type" class="typeCodeCombo2" type="hidden" name="type" :value="old('type')"/>
+              <div class="mb-3">
+                <label for="code" class="text-[#373435] text-xs font-poppins">Ruc</label>
+                <div class="relative mt-1">
+                  <div class="flex">
+                    <input type="text" id="code" name="code" class="p-4 w-full py-1.5 rounded-sm text-xs border-gray-200 text-[#373435] focus:border-gray-200 font-poppins focus:ring-[#e0e0e0] focus:ring-opacity-0" :value="old('code')" autocomplete="code">
+                    <a id="numberRuc" class="p-2 py-0.5 cursor-pointer bg-blue-600 text-white searchbutton font-poppins"><i class="fa-solid fa-magnifying-glass text-xs"></i> </a>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="name" class="text-[#373435] text-xs font-poppins">Razón social</label>
+                <div class="relative mt-1">
+                  <input type="text" id="name" name="name" class="p-4 w-80 py-1.5 rounded-sm text-xs border-gray-200 text-[#373435] focus:border-gray-200 font-poppins focus:ring-[#e0e0e0] focus:ring-opacity-0 bg-gray-200 namelegal" value="{{ old('name') }}" disabled>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="text-[#373435] text-xs font-poppins">Dirección</label>
+                <div class="relative mt-1">
+                  <input type="text" id="address" name="address" class="p-4 w-80 py-1.5 rounded-sm text-xs border-gray-200 text-[#373435] focus:border-gray-200 font-poppins focus:ring-[#e0e0e0] focus:ring-opacity-0 addresslegal" value="{{ old('address') }}" placeholder="Dirección">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="text-[#373435] text-xs font-poppins">Telefono</label>
+                <div class="relative mt-1">
+                  <input type="text" id="phone" name="phone" class="p-4 w-80 py-1.5 rounded-sm text-xs border-gray-200 text-[#373435] focus:border-gray-200 font-poppins focus:ring-[#e0e0e0] focus:ring-opacity-0" value="{{ old('phone') }}" placeholder="Telefono">
+                </div>
               </div>
               <div class="mb-3">
                 <label for="email" class="text-[#373435] text-xs font-poppins">Correo</label>
@@ -91,16 +129,21 @@
                 <button type="submit" class="bg-[#0978be] font-semibold w-80 text-white py-1.5 rounded-sm text-xs font-poppins">Guardar datos</button>
               </div>
             </form>
-          @elseif ($optionSelected == 2)
-            <p>Juridica</p>
           @elseif ($optionSelected == 3)
             <p>Agremiado</p>
           @else 
           @endif
         </div>
-        <div class="flex justify-between">
-          <span class="text-sm">¿No tienes una cuenta?</span> 
-          <a href="{{ route('register') }}" class="text-sm font-normal text-[#42a692] hover:text-[#2c6f62] transition duration-300">Registrarte aquí</a>
+        <div class="flex flex-col items-center justify-center space-y-2">
+          <div class="space-x-1">
+            @if (Route::has('password.request'))
+              <a class="text-sm font-normal text-[#42a692] hover:text-[#2c6f62] transition duration-300" href="{{ route('password.request') }}">¿Has olvidado tu contraseña?</a>
+            @endif
+          </div>
+          <div class="space-x-1">
+            <span class="text-sm font-poppins">Ya tengo una cuenta,</span> 
+            <a class="text-sm font-normal text-[#42a692] hover:text-[#2c6f62] transition duration-300" href="{{ route('login') }}">Iniciar sesión</a>
+          </div>
         </div>
       </div>
     </div>
