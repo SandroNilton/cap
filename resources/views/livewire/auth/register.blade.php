@@ -54,7 +54,7 @@
               @elseif ($selectTypeCode == 2)
                 <div class="mb-3">
                   <div class="flex gap-x-2">
-                    <input type="tel" oninput="this.value|=" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="12" placeholder="Número de documento" @required(true)>
+                    <input type="integer" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" maxlength="12" placeholder="Número de documento" @required(true)>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -62,7 +62,7 @@
                 </div>
               @endif
               <div class="mb-3">
-                <input type="text" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-data x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
+                <input type="text" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
               </div>
               <div class="mb-3">
                 <input type="email" id="email" name="email" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Correo electronico" @required(true)>
