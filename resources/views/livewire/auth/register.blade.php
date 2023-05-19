@@ -36,6 +36,7 @@
               @if($selectTypeCode == 1)
                 <div class="mb-3">
                   <div class="flex gap-x-2">
+                    <input type="hidden" id="type" name="type" value="{{ $selectTypeCode }}">
                     <input wire:model="code" id="code" name="code" type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999" placeholder="Número de documento" @required(true)>
                     <a x-on:click="searchDNI" class="px-1.5 py-1.5 cursor-pointer bg-red-600 text-white self-center rounded">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
@@ -49,24 +50,26 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <input type="text" id="name" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Nombre completo" @required(true)>
+                  <input type="text" id="name" name="name" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Nombre completo" @required(true)>
                 </div>
               @elseif ($selectTypeCode == 2)
                 <div class="mb-3">
-                  <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999999999999" placeholder="Número de documento" @required(true)>
+                  <input type="hidden" id="code_type" name="code_type" value="{{ $selectTypeCode }}">
+                  <input type="text" id="code" name="code" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999999999999" placeholder="Número de documento" @required(true)>
                 </div>
                 <div class="mb-3">
-                  <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Nombre completo" @required(true)>
+                  <input type="text" id="name" name="name" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Nombre completo" @required(true)>
                 </div>
               @endif
               <div class="mb-3">
-                <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
+                <input type="hidden" id="address" name="address">
+                <input type="text" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
               </div>
               <div class="mb-3">
-                <input type="email" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Correo electronico" @required(true)>
+                <input type="email" id="email" name="email" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Correo electronico" @required(true)>
               </div>
               <div class="mb-3">
-                <input type="password" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Contraseña" @required(true)>
+                <input type="password" id="password" name="password" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Contraseña" @required(true)>
               </div>
               <div class="mb-3">
                 <input type="password" id="password_confirmation" name="password_confirmation" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Confirmar contraseña" @required(true)>
@@ -78,8 +81,10 @@
               @csrf
               <div class="mb-3 mt-3">
                 <div class="flex gap-x-2">
-                  <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999" placeholder="Número de ruc" @required(true)>
-                  <a id="btnRUC" class="px-1.5 py-1.5 cursor-pointer bg-blue-600 text-white self-center rounded">
+                  <input type="hidden" id="type" name="type" value="{{ $optionSelected }}">
+                  <input type="hidden" id="code_type" name="code_type">
+                  <input wire:model="code" id="code" name="code" type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="99999999999" placeholder="Número de ruc" @required(true)>
+                  <a x-on:click="searchRUC" class="px-1.5 py-1.5 cursor-pointer bg-blue-600 text-white self-center rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
                       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
                         <g id="icon-111-search" sketch:type="MSArtboardGroup" fill="#FFFFFF">
@@ -91,19 +96,19 @@
                 </div>
               </div>
               <div class="mb-3">
-                <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Razon social" @required(true)>
+                <input type="text" id="name" name="name" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Razon social" @required(true)>
               </div>
               <div class="mb-3">
-                <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Dirección" @required(true)>
+                <input type="text" id="address" name="address" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Dirección" @required(true)>
               </div>
               <div class="mb-3">
-                <input type="text" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
+                <input type="text" id="phone" name="phone" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" x-mask="999-999-999" placeholder="Número de teléfono" @required(true)>
               </div>
               <div class="mb-3">
-                <input type="email" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Correo electronico" @required(true)>
+                <input type="email" id="email" name="email" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Correo electronico" @required(true)>
               </div>
               <div class="mb-3">
-                <input type="password" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Contraseña" @required(true)>
+                <input type="password" id="password" name="password" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Contraseña" @required(true)>
               </div>
               <div class="mb-3">
                 <input type="password" id="password_confirmation" name="password_confirmation" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0" placeholder="Confirmar contraseña" @required(true)>
@@ -146,6 +151,29 @@
         }).then(function(data) {
           // This is the JSON from our response
           document.getElementById("name").value = data.nombres + " " + data.apellidoPaterno + " " + data.apellidoMaterno;
+        }).catch(function(err) {
+          // There was an error
+          console.warn('Something went wrong.', err);
+        });
+      } else {
+        document.getElementById("code").focus();
+      }
+    }
+
+    function searchRUC(e) {
+      var documentsearch = document.getElementById('code').value;
+      if (documentsearch.length > 0 && documentsearch.length == 11) {
+        fetch(`https://dniruc.apisperu.com/api/v1/ruc/${documentsearch}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNhbmRybzkxMTExQGdtYWlsLmNvbSJ9.GYhpk3JfM4vjTzv5PNEGxiZFKEwZLV6keYlvvrgX_s4`).then(function(response) {
+          // The API call was successful!
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        }).then(function(data) {
+          // This is the JSON from our response
+          document.getElementById("name").value = data.razonSocial;
+          document.getElementById("address").value = data.direccion;
         }).catch(function(err) {
           // There was an error
           console.warn('Something went wrong.', err);
