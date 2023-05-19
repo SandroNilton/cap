@@ -12,6 +12,8 @@ class Register extends Component
     public $optiontypeuserSelected;
     public $selectTypeCode;
 
+    public $code;
+
     public function updatedSelectTypeuser($value)
     {
         $this->optionSelected = $value;
