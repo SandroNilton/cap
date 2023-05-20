@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home\ProcedureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () { return view('home.dashboard'); })->name('dashboard');
+Route::get('/dashboard', function() { return view('home.dashboard'); })->name('dashboard');
+Route::resource('procedures', ProcedureController::class);

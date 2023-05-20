@@ -1,3 +1,5 @@
 <x-home-layout>
-  hola 
+
+  @livewire('home.index')
+  
 </x-home-layout>

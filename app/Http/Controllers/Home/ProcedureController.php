@@ -12,7 +12,7 @@ class ProcedureController extends Controller
      */
     public function index()
     {
-        //
+        return view('home.procedures.index');
     }
 
     /**
@@ -44,7 +44,7 @@ class ProcedureController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('home.procedures.edit');
     }
 
     /**
