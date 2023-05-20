@@ -42,7 +42,7 @@
           <div class="mb-4">
             @forelse ($requirements as $requirement)
               <div class="mb-4">
-                <label class="mb-1.5 block text-sm">Adjuntar ({{  $requirement->name  }})</label>
+                <label class="mb-1.5 block text-sm">Adjuntar ({{ $requirement->name }})</label>
                 <input type="hidden" name="files[][id]" value="{{ $requirement->id }}">
                 <input name="files[][file]" id="files" class="text-[#183247] w-full bg-white py-1.5 px-3.5 relative m-0 block flex-auto cursor-pointer rounded border border-[#cfd7df] hover:border-[#42a692] transition-all bg-clip-padding text-sm duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded file:border-0 file:border-solid file:border-inherit file:bg-[#42a692] file:text-white file:px-3 file:py-[0.32rem] file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] focus:outline-none" type="file" accept="" @required(true)>
               </div>

@@ -21,14 +21,17 @@ class Create extends Component
         $this->selectedTypeprocedure = NULL;
       }else{
         $this->typeprocedures = Typeprocedure::where([['category_id', $categoryid], ['state', '=', 1]])->get();
+        $this->reset('selectedTypeprocedure');
       }
     }
 
     public function updatedselectedTypeprocedure($typeprocedureid)
     {
+
       if (is_null($typeprocedureid) || empty($typeprocedureid)) {
         $this->requirements = NULL;
       }else{
+
         $this->requirements = DB::table('requirement_typeprocedure')
           ->join('requirements', 'requirement_typeprocedure.requirement_id', '=', 'requirements.id')
           ->join('typeprocedures', 'requirement_typeprocedure.typeprocedure_id', '=', 'typeprocedures.id')
