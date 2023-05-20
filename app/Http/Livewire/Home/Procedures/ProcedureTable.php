@@ -64,7 +64,7 @@ class ProcedureTable extends DataTableComponent
                 ->html(),
             Column::make('Acciones')
                 ->label(
-                  fn($row, Column $column) => view('admin.procedures.actions')->withRow($row)
+                  fn($row, Column $column) => view('home.procedures.actions')->withRow($row)
                 ),
         ];
     }
