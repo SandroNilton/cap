@@ -27,7 +27,7 @@
           'title' => 'Panel avanzado',
           'url' => route('admin.dashboard'),
           'active' => request()->routeIs('admin.dashboard'),
-          'icon' => '',
+          'icon' => 'home-outline',
           'can' => 'admin.dashboard.index'
         ],
         [
@@ -35,7 +35,7 @@
           'title' => 'Trámites',
           'url' => route('admin.procedures.index'),
           'active' => request()->routeIs('admin.procedures.index') or request()->routeIs('admin.procedures.edit'),
-          'icon' => 'file-text',
+          'icon' => 'document-text-outline',
           'can' => 'admin.procedures.index'
         ],
         [
@@ -43,7 +43,7 @@
           'title' => 'Usuarios',
           'url' => route('admin.users.index'),
           'active' => request()->routeIs('admin.users.index'),
-          'icon' => 'users',
+          'icon' => 'people-outline',
           'can' => 'admin.users.index' 
         ],
         [
@@ -51,7 +51,7 @@
           'title' => 'Clientes',
           'url' => route('admin.customers.index'),
           'active' => request()->routeIs('admin.customers.index'),
-          'icon' => 'thumbs-up',
+          'icon' => 'body-outline',
           'can' => 'admin.customers.index'
         ],
         [
@@ -59,7 +59,7 @@
           'title' => 'Roles',
           'url' => route('admin.roles.index'),
           'active' => request()->routeIs('admin.roles.index'),
-          'icon' => 'shield',
+          'icon' => 'shield-outline',
           'can' => 'admin.roles.index' 
         ],
         [
@@ -67,7 +67,7 @@
           'title' => 'Categorias',
           'url' => route('admin.categories.index'),
           'active' => request()->routeIs('admin.categories.index'),
-          'icon' => 'folder',
+          'icon' => 'folder-outline',
           'can' => 'admin.categories.index'
         ],
         [
@@ -75,7 +75,7 @@
           'title' => 'Areas',
           'url' => route('admin.areas.index'),
           'active' => request()->routeIs('admin.areas.index'),
-          'icon' => 'archive',
+          'icon' => 'file-tray-outline',
           'can' => 'admin.areas.index'
         ],
         [
@@ -83,7 +83,7 @@
           'title' => 'Requisitos',
           'url' => route('admin.requirements.index'),
           'active' => request()->routeIs('admin.requirements.index'),
-          'icon' => 'paperclip',
+          'icon' => 'attach-outline',
           'can' => 'admin.requirements.index'
         ],
         [
@@ -91,7 +91,7 @@
           'title' => 'Tipos de tramite',
           'url' => route('admin.typeprocedures.index'),
           'active' => request()->routeIs('admin.typeprocedures.index'),
-          'icon' => 'clipboard',
+          'icon' => 'briefcase-outline',
           'can' => 'admin.typeprocedures.index'
         ]
       ];
@@ -130,7 +130,7 @@
         }
       }
     </script>
-    @livewire('notifications')
+    <livewire:laravel-notification.notice/>
     @stack('modals')
     @livewireScripts
     @stack('js')

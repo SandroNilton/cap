@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Home\Procedures;
 
 use App\Models\Category;
 use App\Models\Typeprocedure;
+use App\Models\Procedurehistory;
+use App\Models\Fileprocedure;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
@@ -12,6 +14,7 @@ class Create extends Component
     public $categories;
     public $typeprocedures;
     public $requirements;
+    public $description;
     public $selectedCategory = NULL;
     public $selectedTypeprocedure = NULL;
 

@@ -23,5 +23,6 @@
     @livewireScripts
     <!-- Stack CSS -->
     @stack('js')
+    <livewire:laravel-notification.notice/>
   </body>
 </html>

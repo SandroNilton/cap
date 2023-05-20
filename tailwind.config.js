@@ -9,19 +9,12 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php',
-        './vendor/filament/**/*.blade.php', 
     ],
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-            colors: { 
-              danger: colors.rose,
-              primary: colors.blue,
-              success: colors.green,
-              warning: colors.yellow,
-            }, 
         },
     },
 

@@ -30,6 +30,29 @@ class Edit extends Component
         $this->procedure = Route::current()->parameter('procedure');
     }
 
+    public function assignme()
+    {
+        $unassigned_procedure  = Procedure::where([[ 'administrator_id', '=', NULL]])->get();
+
+        if($unassigned_procedure->count() > 0) {
+
+          Procedure::where('id', '=', $this->procedure->id)->update(['administrator_id' => auth()->user()->id]);
+          Procedurehistory::create([
+            'procedure_id' => $this->procedure->id,
+            'typeprocedure_id' => $this->procedure->typeprocedure_id,
+            'area_id' => $this->procedure->area_id,
+            'user_id' => $this->procedure->user_id,
+            'administrator_id' => auth()->user()->id,
+            'description' => $this->procedure->description,
+            'action' => 'Tomar tramite',
+            'state' => 2
+          ]);
+          $this->notice('Se autoasigno el trámite correctamente', 'alert');
+        } else {
+          $this->notice('El trámite ya cuenta con un usuario', 'alert');
+        }
+    }
+
     public function addMessage()
     {
       $this->validate(
@@ -67,10 +90,20 @@ class Edit extends Component
 
       if($this->procedure->area_id != $this->area_id){
         Procedure::where('id', '=', $this->procedure->id)->update(['area_id' => $this->area_id]);
+        Procedurehistory::create([
+          'procedure_id' => $this->procedure->id,
+          'typeprocedure_id' => $this->procedure->typeprocedure_id,
+          'area_id' => $this->area_id,
+          'user_id' => $this->procedure->user_id,
+          'administrator_id' => $this->procedure->administrator_id,
+          'description' => $this->procedure->description,
+          'action' => 'Asignar a área',
+          'state' => 2
+        ]);
         $this->reset('area_id');
-        Notification::make()->success()->title('Se asigno al area correctamente')->send(); 
+        $this->notice('Se asigno al area correctamente', 'alert');
       } else {
-        Notification::make()->warning()->title('El tramite ya se encuenrta en el área seleccionada actualmente')->send(); 
+        $this->notice('El tramite ya se encuenrta en el área seleccionada actualmente', 'alert');
       }
     }
 
@@ -87,10 +120,20 @@ class Edit extends Component
 
       if($this->procedure->administrator_id != $this->user_id){
         Procedure::where('id', '=', $this->procedure->id)->update(['administrator_id' => $this->user_id]);
+        Procedurehistory::create([
+          'procedure_id' => $this->procedure->id,
+          'typeprocedure_id' => $this->procedure->typeprocedure_id,
+          'area_id' => $this->procedure->area_id,
+          'user_id' => $this->procedure->user_id,
+          'administrator_id' => $this->user_id,
+          'description' => $this->procedure->description,
+          'action' => 'Asignar a usuario',
+          'state' => 2
+        ]);
         $this->reset('user_id');
-        Notification::make()->success()->title('Se asigno al usuario correctamente correctamente')->send(); 
+        $this->notice('Se asigno al usuario correctamente', 'alert');
       } else {
-        Notification::make()->warning()->title('El tramite ya se encuenrta en el área seleccionada actualmente')->send(); 
+        $this->notice('El tramite ya se encuentra asignado al usuario seleccionado', 'alert');
       }
     }
 

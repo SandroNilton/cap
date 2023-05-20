@@ -72,7 +72,7 @@
         }
       }
     </script>
-    @livewire('notifications')
+    <livewire:laravel-notification.notice/>
     @stack('modals')
     @livewireScripts
     @stack('js')

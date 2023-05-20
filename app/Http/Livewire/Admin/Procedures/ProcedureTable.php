@@ -12,7 +12,6 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 use App\Exports\AreasExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Notifications\Notification;
 use App\Models\Procedure;
 use App\Models\Procedurehistory;
 
@@ -78,9 +77,9 @@ class ProcedureTable extends DataTableComponent
             'action' => 'Tomar tramite',
             'state' => 2
           ]);
-          Notification::make()->success()->title('Se autoasigno el trámite correctamente')->send(); 
+          $this->notice('Se autoasigno el trámite correctamente', 'alert');
         } else {
-          Notification::make()->warning()->title('El trámite ya cuenta con un usuario')->send(); 
+          $this->notice('El trámite ya cuenta con un usuario', 'alert');
         }
     }
 
