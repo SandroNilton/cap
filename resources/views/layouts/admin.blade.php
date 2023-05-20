@@ -22,7 +22,7 @@
           'title' => 'Panel avanzado',
           'url' => route('admin.dashboard'),
           'active' => request()->routeIs('admin.dashboard'),
-          'icon' => 'aperture',
+          'icon' => '',
           'can' => 'admin.dashboard.index'
         ],
         [
@@ -110,7 +110,8 @@
         </div>
       </div>
     </div>
-    <script src="https://unpkg.com/feather-icons"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
       const setup = () => {
         return {
@@ -123,7 +124,6 @@
           isSearchBoxOpen: false,
         }
       }
-      feather.replace({class: 'foo bar', 'stroke-width': 1, 'width': 16, 'heigth': 16})
     </script>
     @livewire('notifications')
     @stack('modals')

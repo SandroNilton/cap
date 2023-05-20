@@ -1,13 +1,4 @@
 <div>
-  @push('header-menu')
-  <div class="bg-[#f5f7f9] p-1.5 shadow-[0_2px_4px_0_rgb(24,50,71,.08)] border-b border-[#cfd7df] px-3">
-    @can('administrator.areas.create')
-      <a href="{{ route('administrator.areas.create') }}" class=" text-xs pt-1 pr-2.5 pb-1 pl-2 rounded bg-[#f3f5f7] border border-[#cfd7df] bg-gradient-to-b from-[#fff] text-[#183247]">
-        <ion-icon name="add-outline"></ion-icon> Nueva área
-      </a>
-    @endcan
-  </div>
-  @endpush
   @push('options')
   @endpush
   @if (session('notification'))

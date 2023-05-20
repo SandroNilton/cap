@@ -22,14 +22,14 @@
           'title' => 'Panel avanzado',
           'url' => route('home.dashboard'),
           'active' => request()->routeIs('home.dashboard'),
-          'icon' => 'aperture',
+          'icon' => 'home-outline',
         ],
         [
           'id' => 'tramites',
           'title' => 'Trámites',
           'url' => route('home.procedures.index'),
           'active' => request()->routeIs('home.procedures.index') or request()->routeIs('home.procedures.edit'),
-          'icon' => 'file-text',
+          'icon' => 'document-text-outline',
         ]
       ];
     @endphp
@@ -52,7 +52,8 @@
         </div>
       </div>
     </div>
-    <script src="https://unpkg.com/feather-icons"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
       const setup = () => {
         return {
@@ -65,7 +66,6 @@
           isSearchBoxOpen: false,
         }
       }
-      feather.replace({class: 'foo bar', 'stroke-width': 1, 'width': 16, 'heigth': 16})
     </script>
     @livewire('notifications')
     @stack('modals')

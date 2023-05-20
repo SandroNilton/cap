@@ -20,7 +20,7 @@ class ProcedureController extends Controller
      */
     public function create()
     {
-        //
+        return view('home.procedures.create');
     }
 
     /**
