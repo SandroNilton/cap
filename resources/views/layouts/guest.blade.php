@@ -9,8 +9,6 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.12.1/dist/cdn.min.js"></script>
- 
     @stack('css')
   </head>
   <body class="font-sans text-[#212529] antialiased">
@@ -20,6 +18,5 @@
     @livewireScripts
     <!-- Stack CSS -->
     @stack('js')
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>
   </body>
 </html>
