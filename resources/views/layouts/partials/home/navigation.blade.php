@@ -13,11 +13,6 @@
       </span>
     </div>
     <div class="relative flex items-center space-x-3">
-      <div class="items-center hidden space-x-3 md:flex">
-        <x-nav-link href="{{ route('home.dashboard') }}" class="px-2 text-[#183247] text-xs font-medium rounded bg-[#f3f5f7] border border-[#cfd7df] bg-gradient-to-b from-[#fff]">
-          <ion-icon name="accessibility-outline"></ion-icon>
-        </x-nav-link>  
-      </div>
       @auth
         <div class="ml-3 relative">
           <x-dropdown align="right" width="48">

@@ -16,9 +16,19 @@
   </div>
   <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
     <ul class="overflow-hidden px-1 mt-1">
+      @can('admin')
+        <li class="p-1 w-full" >
+          <a id="gestor" href="{{ route('admin.dashboard') }}" x-init="new tippy('#gestor', { content: 'Modo gestor', arrow: true,placement: 'right' })" class="flex items-center bg-[#164AB2] text-sm text-white py-1 space-x-2 px-2 rounded-sm" :class="{'justify-center': !isSidebarOpen}">
+            <span class="items-center flex w-6 h-6">
+              <ion-icon name="person-outline"></ion-icon>
+            </span>
+            <span :class="{ 'lg:hidden': !isSidebarOpen }">Modo gestor</span>
+          </a>
+        </li>
+      @endcan
       @foreach ($links as $link)
         <li class="p-1 w-full" >
-          <a id="{{ $link['id'] }}" href="{{ $link['url'] }}" x-init="new tippy(`#{{ $link['id'] }}`, { content: `{{ $link['title'] }}`, arrow: true,placement: 'right' })" class="flex items-center text-sm py-1 space-x-2 px-2 rounded-sm {{ $link['active'] ? 'text-white bg-[#42a692] hover:bg-[#2c6f62] transition duration-300' : 'text-[#212529]' }}" :class="{'justify-center': !isSidebarOpen}" title="{{ $link['title'] }}">
+          <a id="{{ $link['id'] }}" href="{{ $link['url'] }}" x-init="new tippy(`#{{ $link['id'] }}`, { content: `{{ $link['title'] }}`, arrow: true,placement: 'right' })" class="flex items-center text-sm py-1 space-x-2 px-2 rounded-sm {{ $link['active'] ? 'text-white bg-[#42a692] hover:bg-[#2c6f62] transition duration-300' : 'text-[#212529]' }}" :class="{'justify-center': !isSidebarOpen}">
             <span class="items-center flex w-6 h-6">
               <ion-icon name="{{ $link['icon'] }}"></ion-icon>
             </span>

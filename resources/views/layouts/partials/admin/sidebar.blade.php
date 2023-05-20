@@ -16,6 +16,14 @@
   </div>
   <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
     <ul class="overflow-hidden px-1 mt-1">
+      <li class="p-1 w-full" >
+        <a id="gestor" href="{{ route('home.dashboard') }}" x-init="new tippy('#gestor', { content: 'Modo usuario', arrow: true,placement: 'right' })" class="flex items-center bg-[#164AB2] text-sm text-white py-1 space-x-2 px-2 rounded-sm" :class="{'justify-center': !isSidebarOpen}">
+          <span class="items-center flex w-6 h-6">
+            <ion-icon name="person-outline"></ion-icon>
+          </span>
+          <span :class="{ 'lg:hidden': !isSidebarOpen }">Modo usuario</span>
+        </a>
+      </li>
       @foreach ($links as $link)
         @can($link['can'])
           <li class="p-1 w-full" >
