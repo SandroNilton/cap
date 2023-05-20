@@ -17,6 +17,7 @@ class Register extends Component
     public function updatedSelectTypeuser($value)
     {
         $this->optionSelected = $value;
+        $this->reset('code');
     }
 
     public function render()
