@@ -22,6 +22,7 @@ class Create extends Component
       }else{
         $this->typeprocedures = Typeprocedure::where([['category_id', $categoryid], ['state', '=', 1]])->get();
         $this->reset('selectedTypeprocedure');
+        $this->selectedTypeprocedure = "";
       }
     }
 
