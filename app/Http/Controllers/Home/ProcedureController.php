@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\TypeProcedure;
+use App\Models\Typeprocedure;
 use App\Models\Procedure;
 use App\Models\Procedurehistory;
 use App\Models\Fileprocedure;
@@ -34,7 +34,7 @@ class ProcedureController extends Controller
      */
     public function store(Request $request)
     {
-      $typeprocedure_area = TypeProcedure::where([['id', '=', $request->typeprocedure_id]])->get();
+      $typeprocedure_area = Typeprocedure::where([['id', '=', $request->typeprocedure_id]])->get();
       $procedure = Procedure::create([
         'typeprocedure_id' => $request->typeprocedure_id,
         'area_id' => $typeprocedure_area[0]->area_id,
