@@ -6,8 +6,6 @@
       </a>
     </div>
   @endpush
-  <div class="space-x-2 flex items-center">
-  </div>
   <div class="flex-col space-y-4">
     <livewire:home.procedures.procedure-table />
   </div>

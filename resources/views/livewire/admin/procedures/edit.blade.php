@@ -164,32 +164,34 @@
       @endcan
       <div class="bg-white rounded p-4 mb-4">
         <div class="items-center">
-          <p class="text-sm font-poppins text-gray-600 mb-3">Requisitos adjuntados del trámite:</p>
+          <p class="text-sm font-poppins text-gray-600 mb-3">Requisitos:  @error('state_id') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
           <div class="flex text-sm gap-x-3">
             @forelse ($procedure_files as $procedure_file)  
               <li class="w-full border border-dashed border-[#2c6f62] transition duration-300 flex flex-row mb-2 rounded-md">
                 <div class="rounded-sm flex flex-1 items-center p-2.5 gap-x-3">
-                  <span class="cursor-pointer">
-                    <div class="flex flex-col rounded-sm w-8 h-11 bg-[#42a692] justify-center items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                      </svg>
-                    </div>
-                  </span>
+
+                  <button wire:click="downloadFile({{ $procedure_file->id }}, '{{ $procedure_file->name }}', '{{ $procedure_file->file }}')" class="flex flex-col rounded-sm w-8 h-11 bg-[#42a692] justify-center items-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                  </button>
+
                   <div class="flex-1">
                     <div class="text-xs mb-0.5 w-44 truncate" title="{{ $procedure_file->name }}">{{ $procedure_file->name }}</div>
                     <div class="flex gap-x-3">
-                      <select name="state" id="state" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
-                        <option value="1" @if($procedure_file->state == 1) @selected(true) @else @selected(false) @endif>Sin verificar</option>
-                        <option value="2" @if($procedure_file->state == 2) @selected(true) @else @selected(false) @endif>Aceptado</option>
-                        <option value="3" @if($procedure_file->state == 3) @selected(true) @else @selected(false) @endif>Rechazado</option>
-                      </select>
-                      <button class="p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">
-                        Asignar
-                      </button>
+                      <form wire:submit.prevent="changeStateFile({{ $procedure_file->id }}, {{ $procedure_file->state }})" class="flex w-full gap-x-3">
+                        <select  wire:model="state_id" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
+                          <option value="1" @if($procedure_file->state == 1) @selected(true) @else @selected(false) @endif>Sin verificar</option>
+                          <option value="2" @if($procedure_file->state == 2) @selected(true) @else @selected(false) @endif>Aceptado</option>
+                          <option value="3" @if($procedure_file->state == 3) @selected(true) @else @selected(false) @endif>Rechazado</option>
+                        </select>
+                        <button class="p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">
+                          Asignar
+                        </button>
+                      </form>
                     </div>
                   </div>
-                </div>
+                </div> 
               </li>
             @empty
               <li class="w-full border border-dashed border-[#2c6f62] transition duration-300 flex flex-row rounded-md">

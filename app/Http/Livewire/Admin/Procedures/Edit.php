@@ -8,7 +8,7 @@ use App\Models\Procedure;
 use App\Models\Area;
 use App\Models\User;
 use App\Models\Fileprocedure;
-use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Route;
 
 class Edit extends Component
@@ -22,6 +22,7 @@ class Edit extends Component
     public $users;
     public $area_id;
     public $user_id;
+    public $state_id;
     public $procedure;
     public $procedure_data;
 
@@ -73,8 +74,15 @@ class Edit extends Component
 
       $this->reset('message');
 
-      Notification::make()->success()->title('Se registro el comentario correctamente')->send(); 
+    }
 
+    public function downloadFile($id, $name, $file)
+    {
+      $headers = [
+        'Content-Description' => 'File Transfer',
+        'Content-Type' => Storage::mimeType($name), 
+      ];
+      return Storage::download($file, $name, $headers);
     }
 
     public function changeArea()
@@ -134,6 +142,21 @@ class Edit extends Component
         $this->notice('Se asigno al usuario correctamente', 'alert');
       } else {
         $this->notice('El tramite ya se encuentra asignado al usuario seleccionado', 'alert');
+      }
+    }
+
+    public function changeStateFile($id, $state)
+    {
+
+      if($this->state_id == NULL){
+        $this->notice('El archivo ya cuenta este estado', 'alert');
+      } else {
+        if($state == $this->state_id){
+          $this->notice('El archivo ya cuenta este estado', 'alert');
+        } else {
+          Fileprocedure::where('id', '=', $id)->update(['state' => $this->state_id]);
+          $this->notice('Se actualizo el estado correctamente', 'alert');
+        }
       }
     }
 

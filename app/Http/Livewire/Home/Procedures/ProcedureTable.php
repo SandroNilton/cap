@@ -54,7 +54,7 @@ class ProcedureTable extends DataTableComponent
                 ),
             Column::make("Estado", "state")
                 ->format(
-                  fn($value, $row, Column $column) => view('admin.procedures.state')->withValue($value)
+                  fn($value, $row, Column $column) => view('home.procedures.state')->withValue($value)
                 ),
             Column::make("Fecha de creación", "created_at")
                 ->sortable()
