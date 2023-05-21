@@ -14,7 +14,7 @@
             Antes de continuar, ¿podría verificar su dirección de correo electrónico haciendo clic en el enlace que le acabamos de enviar? Si no recibiste el correo electrónico, con gusto te enviaremos otro.
           </div>
           @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 text-sm text-sm font-normal text-[#42a692]">
+            <div class="mb-4 text-sm font-normal text-[#42a692]">
               Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionó en la configuración de su perfil.
             </div>
           @endif
