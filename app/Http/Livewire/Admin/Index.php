@@ -2,170 +2,60 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Procedure as Procedures;
+use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
-use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class Index extends Component
 {
+    public $state = [1, 2, 3, 4, 5, 6];
+
+    public $colors = [1 => '#f6ad55', 2 => '#fc8181', 3 => '#90cdf4', 4 => '#66DA26', 5 => '#cbd5e0', 6 => '#66DA26'];
+
+    public $firstRun = true;
+    public $showDataLabels = false;
+
+    protected $listeners = [
+      'onPointClick' => 'handleOnPointClick',
+      'onSliceClick' => 'handleOnSliceClick',
+      'onColumnClick' => 'handleOnColumnClick',
+    ];
+
+    public function handleOnPointClick($point)
+    {
+        dd($point);
+    }
+
+    public function handleOnSliceClick($slice)
+    {
+        dd($slice);
+    }
+
+    public function handleOnColumnClick($column)
+    {
+        dd($column);
+    }
+
     public function render()
     {
-        $all = [
-          'chart_title' => 'Trámites',
-          'chart_type' => 'line',
-          'report_type' => 'group_by_date',
-          'model' => 'App\Models\Procedure',
-          'group_by_field' => 'created_at',
-          'group_by_period' => 'day',
-          'aggregate_function' => 'count',
-          'filter_field'=> 'created_at',
-          'filter_days' => '30',
-          'group_by_field_format' => 'Y-m-d H:i:s',
-          'entries_number' => '5',
-          'translation_key'  => 'procedure',
-          'aggregate_field' => 'trámites',
-          'continuous_time' => true,
-          'chart_color' => '#2AD5CB',
-        ];
+        $procedures = Procedures::whereIn('state', $this->state)->get();
 
-        $unassigned = [
-          'chart_title' => 'Sin asignar',
-          'chart_type' => 'line',
-          'report_type' => 'group_by_date',
-          'model' => 'App\Models\Procedure',
-          'conditions' => [
-            ['name' => 'Sin asignar', 'condition' => 'state = 1', 'color' => '#C8B9CB', 'fill' => true],
-          ],
-          'group_by_field' => 'created_at',
-          'group_by_period' => 'day',
-          'aggregate_function' => 'count',
-          'filter_field'=> 'created_at',
-          'filter_days' => '30',
-          'group_by_field_format' => 'Y-m-d H:i:s',
-          'entries_number' => '5',
-          'translation_key'  => 'procedure',
-          'aggregate_field' => 'trámites',
-          'continuous_time' => true,
-        ];
+        $columnChartModel = $procedures->groupBy('state')->reduce(function ($columnChartModel, $data) {
+          $state = $data->first()->state;
+          $value = $data->sum('state');
+          return $columnChartModel->addColumn($state, $value, $this->colors[$state]);
+        }, LivewireCharts::columnChartModel()
+          ->setTitle('Trámites')
+          ->setAnimated($this->firstRun)
+          ->withOnColumnClickEventName('onColumnClick')
+          ->setLegendVisibility(false)
+          ->setDataLabelsEnabled($this->showDataLabels)
+          ->setColumnWidth(90)
+          ->withGrid()
+        );
 
-        $assign = [
-          'chart_title' => 'Asignado',
-          'chart_type' => 'line',
-          'report_type' => 'group_by_date',
-          'model' => 'App\Models\Procedure',
-          'conditions' => [
-            ['name' => 'Asignado', 'condition' => 'state = 2', 'color' => '#B735D4', 'fill' => true],
-          ],
-          'group_by_field' => 'created_at',
-          'group_by_period' => 'day',
-          'aggregate_function' => 'count',
-          'filter_field'=> 'created_at',
-          'filter_days' => '30',
-          'group_by_field_format' => 'Y-m-d H:i:s',
-          'entries_number' => '5',
-          'translation_key'  => 'procedure',
-          'aggregate_field' => 'trámites',
-          'continuous_time' => true,
-        ];
+        $this->firstRun = false;
 
-        $observed = [
-          'chart_title' => 'Observado',
-          'chart_type' => 'line',
-          'report_type' => 'group_by_date',
-          'model' => 'App\Models\Procedure',
-          'conditions' => [
-            ['name' => 'Observado', 'condition' => 'state = 3', 'color' => '#D47835', 'fill' => true],
-          ],
-          'group_by_field' => 'created_at',
-          'group_by_period' => 'day',
-          'aggregate_function' => 'count',
-          'filter_field'=> 'created_at',
-          'filter_days' => '30',
-          'group_by_field_format' => 'Y-m-d H:i:s',
-          'entries_number' => '5',
-          'translation_key'  => 'procedure',
-          'aggregate_field' => 'trámites',
-          'continuous_time' => true,
-        ];
-
-        $reviewed = [
-          'chart_title' => 'Revisado',
-          'chart_type' => 'line',
-          'report_type' => 'group_by_date',
-          'model' => 'App\Models\Procedure',
-          'conditions' => [
-            ['name' => 'Revisado', 'condition' => 'state = 4', 'color' => '#35B1C5', 'fill' => true],
-          ],
-          'group_by_field' => 'created_at',
-          'group_by_period' => 'day',
-          'aggregate_function' => 'count',
-          'filter_field'=> 'created_at',
-          'filter_days' => '30',
-          'group_by_field_format' => 'Y-m-d H:i:s',
-          'entries_number' => '5',
-          'translation_key'  => 'procedure',
-          'aggregate_field' => 'trámites',
-          'continuous_time' => true,
-        ];
-
-        $approved = [
-          'chart_title' => 'Aprovado',
-          'chart_type' => 'line',
-          'report_type' => 'group_by_date',
-          'model' => 'App\Models\Procedure',
-          'conditions' => [
-            ['name' => 'Aprovado', 'condition' => 'state = 5', 'color' => '#5AC535', 'fill' => true],
-          ],
-          'group_by_field' => 'created_at',
-          'group_by_period' => 'day',
-          'aggregate_function' => 'count',
-          'filter_field'=> 'created_at',
-          'filter_days' => '30',
-          'group_by_field_format' => 'Y-m-d H:i:s',
-          'entries_number' => '5',
-          'translation_key'  => 'procedure',
-          'aggregate_field' => 'trámites',
-          'continuous_time' => true,
-        ];
-
-        $refused = [
-          'chart_title' => 'Rechazado',
-          'chart_type' => 'line',
-          'report_type' => 'group_by_date',
-          'model' => 'App\Models\Procedure',
-          'conditions' => [
-            ['name' => 'Rechazado', 'condition' => 'state = 6', 'color' => '#EC1A2D', 'fill' => true],
-          ],
-          'group_by_field' => 'created_at',
-          'group_by_period' => 'day',
-          'aggregate_function' => 'count',
-          'filter_field'=> 'created_at',
-          'filter_days' => '30',
-          'group_by_field_format' => 'Y-m-d H:i:s',
-          'entries_number' => '5',
-          'translation_key'  => 'procedure',
-          'aggregate_field' => 'trámites',
-          'continuous_time' => true,
-        ];
-
-        $all2 = [
-          'chart_title' => 'Trámites',
-          'chart_type' => 'pie',
-          'report_type' => 'group_by_string',
-          'model' => 'App\Models\Procedure',
-          'conditions' => [
-            ['name' => 'Sin asignar', 'condition' => 'state = 1', 'color' => 'black', 'fill' => true],
-            ['name' => 'Asignado', 'condition' => 'state = 2', 'color' => 'blue', 'fill' => true],
-            ['name' => 'Observado', 'condition' => 'state = 3', 'color' => 'blue', 'fill' => true],
-            ['name' => 'Revisado', 'condition' => 'state = 4', 'color' => 'blue', 'fill' => true],
-          ],
-          'group_by_field' => 'state',
-          'filter_field' => 'created_at',
-          'filter_period' => 'week'
-        ];
-
-        $chartprocedures = new LaravelChart($all, $unassigned, $assign, $observed, $reviewed, $approved, $refused);
-        $chartprocedurespie = new LaravelChart($all2);
-
-        return view('livewire.admin.index', compact('chartprocedures', 'chartprocedurespie'));
+        return view('livewire.admin.index')->with(['columnChartModel' => $columnChartModel]);
     }
 }

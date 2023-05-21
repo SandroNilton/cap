@@ -133,6 +133,7 @@
     <livewire:laravel-notification.notice/>
     @stack('modals')
     @livewireScripts
+    @livewireChartsScripts
     @stack('js')
   </body>
 </html>
