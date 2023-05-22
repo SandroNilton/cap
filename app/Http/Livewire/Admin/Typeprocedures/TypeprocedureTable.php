@@ -21,8 +21,8 @@ class TypeprocedureTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            DateTimeFilter::make('Creación desde')->filter(function(Builder $builder, string $value) { $builder->where('created_at', '>=', $value); }),
-            DateTimeFilter::make('Creación a')->filter(function(Builder $builder, string $value) { $builder->where('created_at', '<=', $value); }),
+            DateTimeFilter::make('Creación desde')->filter(function(Builder $builder, string $value) { $builder->where('typeprocedures.created_at', '>=', $value); }),
+            DateTimeFilter::make('Creación a')->filter(function(Builder $builder, string $value) { $builder->where('typeprocedures.created_at', '<=', $value); }),
             SelectFilter::make('Estado')
             ->setFilterPillTitle('Estado')
             ->setFilterPillValues(['1' => 'Activo', '0' => 'Inactivo',])

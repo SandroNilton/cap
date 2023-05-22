@@ -10,9 +10,7 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
-use App\Exports\AreasExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Notifications\Notification;
 use App\Models\Procedure;
 use Carbon\Carbon;
 
@@ -31,12 +29,8 @@ class ProcedureTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        $this->setHideBulkActionsWhenEmptyStatus(true);
-        $this->setBulkActions([
-          'exportSelected' => 'Export',
-        ]);
-        $this->setBulkActionsEnabled();
     }
+
 
     public function columns(): array
     {

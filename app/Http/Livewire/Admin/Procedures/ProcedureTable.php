@@ -54,11 +54,6 @@ class ProcedureTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        $this->setHideBulkActionsWhenEmptyStatus(true);
-        $this->setBulkActions([
-          'exportSelected' => 'Export',
-        ]);
-        $this->setBulkActionsEnabled();
     }
 
     public function assignme($id)
