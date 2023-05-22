@@ -70,7 +70,7 @@ class TypeprocedureTable extends DataTableComponent
 
     public function export()
     {
-      $areas = $this->getSelected();
+      $typeprocedures = $this->getSelected();
       $this->clearSelected();
       return Excel::download(new TypeproceduresExport($typeprocedures), 'tiposdetramites.xlsx');
     }
