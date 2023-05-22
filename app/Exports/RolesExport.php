@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Category;
+use App\Models\Role;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -12,12 +12,12 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class CategoriesExport implements FromQuery, /*FromCollection,*/ WithHeadings, WithMapping, ShouldAutoSize, WithColumnFormatting
+class RolesExport implements FromQuery, /*FromCollection,*/ WithHeadings, WithMapping, ShouldAutoSize, WithColumnFormatting
 {
-    public $categories;
+    public $roles;
 
-    public function __construct($categories) {
-        $this->categories = $categories;
+    public function __construct($roles) {
+        $this->roles = $roles;
     }
 
     public function headings(): array
@@ -25,8 +25,6 @@ class CategoriesExport implements FromQuery, /*FromCollection,*/ WithHeadings, W
         return [
             '#',
             'Nombre',
-            'Descripción',
-            'Estado',
             'Fecha de creación'
         ];
     }
@@ -39,21 +37,23 @@ class CategoriesExport implements FromQuery, /*FromCollection,*/ WithHeadings, W
         return [
             $invoice->id,
             $invoice->name,
-            $invoice->description,
-            $invoice->state,
-            $invoice->created_at, 
+            $invoice->created_at,
+            //\PhpOffice\PhpSpreadsheet\Shared\Date::dateTimeToExcel($invoice->created_at),
         ];
     }
 
     public function columnFormats(): array
     {
         return [
-            'E' => NumberFormat::FORMAT_DATE_DATETIME,
+            'C' => NumberFormat::FORMAT_DATE_DATETIME,
         ];
     }
 
+    /**
+    * @return \Illuminate\Support\Collection
+    */
     public function query()
     {
-        return Category::whereIn('id', $this->categories);
+        return Role::whereIn('id', $this->roles);
     }
 }

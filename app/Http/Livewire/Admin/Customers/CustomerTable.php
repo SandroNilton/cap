@@ -10,9 +10,8 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
-use App\Exports\AreasExport;
+use App\Exports\CustomersExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Notifications\Notification;
 use App\Models\User;
 
 class CustomerTable extends DataTableComponent
@@ -72,14 +71,12 @@ class CustomerTable extends DataTableComponent
 
     public function activate()
     {
-        Notification::make()->success()->title('Se activó correctamente')->send(); 
         User::whereIn('id', $this->getSelected())->update(['state' => true]);
         $this->clearSelected();
     }
 
     public function deactivate()
     {
-        Notification::make()->danger()->title('Se desactivó correctamente')->send(); 
         User::whereIn('id', $this->getSelected())->update(['state' => false]);
         $this->clearSelected();
     }
@@ -95,17 +92,21 @@ class CustomerTable extends DataTableComponent
     {
         return [
             Column::make("#", "id")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Tipo", "type")
                 ->format(
                   fn($value, $row, Column $column) => view('admin.customers.type')->withValue($value)
               ),
             Column::make("Codigo", "code")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Nombre", "name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Correo", "email")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             BooleanColumn::make("Estado", "state")
                 ->sortable(),
             Column::make("Fecha de creación", "created_at")

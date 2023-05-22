@@ -53,7 +53,7 @@ class CustomerController extends Controller
      */
     public function edit(User $customer)
     {
-        return view('admin.customers.edit');
+        return view('admin.customers.edit'); 
     }
 
     /**

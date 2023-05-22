@@ -10,9 +10,8 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
-use App\Exports\AreasExport;
+use App\Exports\RolesExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Notifications\Notification;
 use App\Models\Role;
 
 class RoleTable extends DataTableComponent

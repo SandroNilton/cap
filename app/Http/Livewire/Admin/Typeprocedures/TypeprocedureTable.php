@@ -10,9 +10,8 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
-use App\Exports\AreasExport;
+use App\Exports\TypeproceduresExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Notifications\Notification;
 use App\Models\Typeprocedure;
 
 class TypeprocedureTable extends DataTableComponent
@@ -30,9 +29,9 @@ class TypeprocedureTable extends DataTableComponent
             ->options(['' => 'Todo', '1' => 'Activo', '0' => 'Inactivo',])
             ->filter(function(Builder $builder, string $value) {
               if ($value === '1') {
-                  $builder->where('state', true);
+                  $builder->where('typeprocedures.state', true);
               } elseif ($value === '0') {
-                  $builder->where('state', false);
+                  $builder->where('typeprocedures.state', false);
               }
             }),
         ];
@@ -59,14 +58,12 @@ class TypeprocedureTable extends DataTableComponent
 
     public function activate()
     {
-        Notification::make()->success()->title('Se activó correctamente')->send(); 
         Typeprocedure::whereIn('id', $this->getSelected())->update(['state' => true]);
         $this->clearSelected();
     }
 
     public function deactivate()
     {
-        Notification::make()->danger()->title('Se desactivó correctamente')->send(); 
         Typeprocedure::whereIn('id', $this->getSelected())->update(['state' => false]);
         $this->clearSelected();
     }

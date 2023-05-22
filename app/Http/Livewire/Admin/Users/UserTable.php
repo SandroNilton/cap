@@ -10,9 +10,8 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
-use App\Exports\AreasExport;
+use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Notifications\Notification;
 use App\Models\User;
 
 class UserTable extends DataTableComponent
@@ -46,6 +45,38 @@ class UserTable extends DataTableComponent
           'exportSelected' => 'Exportar',
         ]);
         $this->setBulkActionsEnabled();
+    }
+
+    public function bulkActions(): array
+    {
+        return [
+            'activate' => 'Activar',
+            'deactivate' => 'Desactivar',
+            'export' => 'Exportar',
+        ];
+    }
+
+    public function activate()
+    {
+        User::whereIn('id', $this->getSelected())->update(['state' => true]);
+        $this->notice('Se activo correctamente', 'alert');
+        $this->clearSelected();
+    }
+    
+
+    public function deactivate()
+    {
+        User::whereIn('id', $this->getSelected())->update(['state' => false]);
+        $this->notice('Se desactivo correctamente', 'alert');
+        $this->clearSelected();
+    }
+
+    public function export()
+    {
+      $users = $this->getSelected();
+      $this->clearSelected();
+      $this->notice('Se exporto correctamente', 'alert');
+      return Excel::download(new UsersExport($users), 'usuarios.xlsx');
     }
 
     public function columns(): array

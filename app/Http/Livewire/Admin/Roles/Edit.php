@@ -18,6 +18,12 @@ class Edit extends Component
         $this->role = Route::current()->parameter('role');
     }
 
+    public function deleteRole($id)
+    {
+        Role::where('id', $id)->delete();
+        return redirect()->route('admin.roles.index')->notice('Se eliminó el rol correctamente', 'alert');
+    }
+
     public function render()
     {
         $this->role_data = Role::where([['id', '=', $this->role->id]])->get();

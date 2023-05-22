@@ -18,6 +18,12 @@ class Edit extends Component
         $this->user = Route::current()->parameter('user');
     }
 
+    public function deleteUser($id)
+    {
+        User::where('id', $id)->delete();
+        return redirect()->route('admin.users.index')->notice('Se eliminó el usuario correctamente', 'alert');
+    }
+
     public function render()
     {   
         $this->user_data = User::where([['id', '=', $this->user->id]])->get();

@@ -1,4 +1,11 @@
 <div>
+  @push('header-menu')
+    <div class="bg-[#f5f7f9] p-1.5 border-b border-[#cfd7df] px-3">
+      <a href="{{ route('admin.categories.index') }}" class="w-fit items-center inline-flex justify-center px-3 py-1.5 text-sm font-normal bg-white rounded border border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 shadow-sm hover:bg-gray-50">
+        <ion-icon name="list-outline" class="pr-2"></ion-icon> Lista de categorías
+      </a>
+    </div>
+  @endpush
   <div class="flex items-center justify-center">
     <section class="container max-w-full rounded-sm bg-white p-4">
       <div class="flex flex-col">
@@ -22,8 +29,13 @@
                   <option value="0" @if($category_data[0]->state == false) @selected(true) @else @selected(false) @endif >Inactivo</option>
                 </select>
               </div>
-              <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1.5 hover:bg-[#2c6f62] transition duration-300">Actualizar categoria</button>
+              <div class="mb-3">
+                <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1.5 hover:bg-[#2c6f62] transition duration-300">Actualizar categoria</button>
+              </div>
             </form>
+            @can('admin.categories.destroy')
+              <button wire:click="deleteCategory({{ $category_data[0]->id }})" class="bg-[#C83232] px-2 rounded text-white text-sm py-1.5 transition duration-300"> Eliminar categoría</button>
+            @endcan
           </div>
         </div>
       </div>

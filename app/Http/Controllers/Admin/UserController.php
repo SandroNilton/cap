@@ -81,7 +81,7 @@ class UserController extends Controller
           'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('admin.users.index')->notice('El usuario se creo correctamente', 'alert');
+        return redirect()->route('admin.users.index')->notice('El usuario se creo correctamente', 'alert'); 
     }
 
     /**

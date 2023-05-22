@@ -26,8 +26,8 @@ class AreasExport implements FromQuery, /*FromCollection,*/ WithHeadings, WithMa
             '#',
             'Nombre',
             'Descripción',
-            'Estado',
             'Límite de dias',
+            'Estado',
             'Fecha de creación'
         ];
     }

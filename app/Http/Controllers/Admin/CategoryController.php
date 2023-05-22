@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -37,7 +37,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+          [
+            'name' => 'required|string|max:255|unique:categories',
+            'description' => 'max:255'
+          ],
+          [
+            'name.required' => 'Rellena este campo obligatorio',
+            'name.unique' => 'Este nombre ya esta tomado'
+          ]
+        );
+        Category::create($request->all()); 
+        return redirect()->route('admin.categories.index')->notice('La categoria se creo correctamente', 'alert');
     }
 
     /**

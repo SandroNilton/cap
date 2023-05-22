@@ -29,7 +29,7 @@ class RequirementController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.requirements.create');
     }
 
     /**
@@ -37,7 +37,18 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+          [
+            'name' => 'required|string|max:255|unique:requirements',
+            'description' => 'max:255'
+          ],
+          [
+            'name.required' => 'Rellena este campo obligatorio',
+            'name.unique' => 'Este nombre ya esta tomado'
+          ]
+        );
+        Requirement::create($request->all()); 
+        return redirect()->route('admin.requirements.index')->notice('El requisito se creo correctamente', 'alert');
     }
 
     /**

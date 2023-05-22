@@ -29,7 +29,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.areas.create');
     }
 
     /**
@@ -37,7 +37,18 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+          [
+            'name' => 'required|string|max:255|unique:areas',
+            'description' => 'max:255'
+          ],
+          [
+            'name.required' => 'Rellena este campo obligatorio',
+            'name.unique' => 'Este nombre ya esta tomado'
+          ]
+        );
+        Area::create($request->all());
+        return redirect()->route('admin.areas.index')->notice('El área se creo correctamente', 'alert');
     }
 
     /**

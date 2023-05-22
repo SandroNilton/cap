@@ -31,7 +31,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
@@ -39,7 +39,18 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+          [
+            'name' => 'required|string|max:255|unique:roles'
+          ],
+          [
+            'name.required' => 'Rellena este campo obligatorio',
+            'name.unique' => 'Este nombre ya esta tomado'
+          ]
+        );
+        $role = Role::create(['name' => $request->name]);
+        $role->permissions()->sync($request->permissions);
+        return redirect()->route('admin.roles.index')->notice('El rol se creo correctamente', 'alert');
     }
 
     /**

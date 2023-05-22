@@ -19,11 +19,10 @@
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-5">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5 text-[#183247]">
-            <form action="{{ route('admin.typeprocedures.update', $typeprocedure_data[0]->id) }}" method="POST">
+            <form action="{{ route('admin.typeprocedures.store') }}" method="POST">
               @csrf
-              @method('PUT')
               <div class="mb-4">
-                <input type="text" name="name" id="name" value="{{ old('name', $typeprocedure_data[0]->name) }}" autofocus placeholder="Nombre" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('name')) border-[#d72d30] @endif"/>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" autofocus placeholder="Nombre" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('name')) border-[#d72d30] @endif"/>
                 @error('name')
                   <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</strong>
                 @enderror
@@ -32,7 +31,7 @@
                 <select name="area_id" id="area_id" class="text-[#183247] cursor-pointer rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('area_id')) border-[#d72d30] @endif">
                   <option value=""> Seleccione el área </option>
                   @foreach ($areas as $area)
-                    <option value="{{ $area->id }}" selected>{{ $area->name }}</option>
+                    <option value="{{ $area->id }}">{{ $area->name }}</option>
                   @endforeach
                 </select>
                 @error('area_id')
@@ -43,7 +42,7 @@
                 <select name="category_id" id="category_id" class="text-[#183247] cursor-pointer rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('category_id')) border-[#d72d30] @endif">
                   <option value=""> Seleccione el área </option>
                   @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                   @endforeach
                 </select>
                 @error('category_id')
@@ -51,37 +50,30 @@
                 @enderror
               </div>
               <div class="mb-4">
-                <select name="requirements[]" class="requirement-multiple text-[#183247] cursor-pointer rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('requirements')) border-[#d72d30] @endif" multiple="multiple">
-                  @foreach ($typeprocedure_data[0]->requirements as $requirement)
-                    <option value="{{ $requirement->id }}" selected> {{ $requirement->name }}</option>
-                  @endforeach
-                </select>
+                <select name="requirements[]" class="requirement-multiple text-[#183247] cursor-pointer rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('requirements')) border-[#d72d30] @endif" multiple="multiple"></select>
                 @error('requirements')
                   <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</strong>
                 @enderror
               </div>
               <div class="mb-4">
-                <input type="text" name="price" id="price" x-mask:dynamic="$money($input)" value="{{ old('price', $typeprocedure_data[0]->price) }}" placeholder="Precio" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('price')) border-[#d72d30] @endif"/>
+                <input type="text" name="price" id="price" x-mask:dynamic="$money($input)" value="{{ old('price') }}" placeholder="Precio" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('price')) border-[#d72d30] @endif"/>
                 @error('price')
                   <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</strong>
                 @enderror
               </div>
               <div class="mb-4">
-                <textarea type="text" maxlength="255" name="description" id="description" placeholder="Descripción" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">{{ old('description', $typeprocedure_data[0]->description) }}</textarea>
+                <textarea type="text" maxlength="255" name="description" id="description" placeholder="Descripción" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">{{ old('description') }}</textarea>
               </div>
               <div class="mb-4">
                 <select id="state" name="state"  class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
-                  <option value="1" @if($typeprocedure_data[0]->state == true) @selected(true) @else @selected(false) @endif >Activo</option>
-                  <option value="0" @if($typeprocedure_data[0]->state == false) @selected(true) @else @selected(false) @endif >Inactivo</option>
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
                 </select>
               </div>
               <div class="mb-3">
-                <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1.5 hover:bg-[#2c6f62] transition duration-300">Actualizar tipo de trámite</button>
+                <button class="bg-[#42a692] px-2 rounded text-white text-sm py-1.5 hover:bg-[#2c6f62] transition duration-300">Registrar tipo de trámite</button>
               </div> 
             </form>
-            @can('admin.typeprocedures.destroy')
-              <button wire:click="deleteTypeprocedure({{ $typeprocedure_data[0]->id }})" class="bg-[#C83232] px-2 rounded text-white text-sm py-1.5 transition duration-300"> Eliminar tipo de trámite</button>
-            @endcan
           </div>
         </div>
       </div>

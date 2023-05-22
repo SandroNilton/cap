@@ -12,7 +12,6 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 use App\Exports\AreasExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Notifications\Notification;
 use App\Models\Area;
 
 class AreaTable extends DataTableComponent
@@ -59,14 +58,12 @@ class AreaTable extends DataTableComponent
 
     public function activate()
     {
-        Notification::make()->success()->title('Se activó correctamente')->send(); 
         Area::whereIn('id', $this->getSelected())->update(['state' => true]);
         $this->clearSelected();
     }
 
     public function deactivate()
     {
-        Notification::make()->danger()->title('Se desactivó correctamente')->send(); 
         Area::whereIn('id', $this->getSelected())->update(['state' => false]);
         $this->clearSelected();
     }

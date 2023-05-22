@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->foreignId('area_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
-            $table->decimal('price', 2);
+            $table->string('price');
             $table->boolean('state')->default(1);
             $table->timestamps();
         });
