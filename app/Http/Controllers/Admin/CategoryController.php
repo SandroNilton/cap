@@ -53,7 +53,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit');
     }
 
     /**
@@ -61,7 +61,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate(
+          [
+            'name' => 'required|string|max:255|unique:categories,name,'.$category->id,
+            'description' => 'max:255'
+          ],
+          [
+            'name.required' => 'Rellena este campo obligatorio',
+            'name.unique' => 'Este nombre ya esta tomado'
+          ]
+        );
+        $category->update($request->all());
+        return redirect()->route('admin.categories.index')->notice('La categoria se actualizo correctamente', 'alert');
     }
 
     /**

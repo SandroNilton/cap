@@ -14,10 +14,9 @@
                 @enderror
               </div>
               <div class="mb-4">
-                <textarea type="text" maxlength="255" name="description" id="description" placeholder="Descripción" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">{{ old('description', $area->description) }}</textarea>
+                <textarea type="text" maxlength="255" name="description" id="description" placeholder="Descripción" class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">{{ old('description', $area_data[0]->description) }}</textarea>
               </div>
               <div class="mb-4">
-                <label class="mb-1.5 block text-xxs font-medium text-[#475867]">Estado</label>
                 <select id="state" name="state"  class="text-[#183247] rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
                   <option value="1" @if($area_data[0]->state == true) @selected(true) @else @selected(false) @endif >Activo</option>
                   <option value="0" @if($area_data[0]->state == false) @selected(true) @else @selected(false) @endif >Inactivo</option>

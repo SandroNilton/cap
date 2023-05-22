@@ -53,7 +53,7 @@ class RequirementController extends Controller
      */
     public function edit(Requirement $requirement)
     {
-        //
+        return view('admin.requirements.edit');
     }
 
     /**
@@ -61,7 +61,18 @@ class RequirementController extends Controller
      */
     public function update(Request $request, Requirement $requirement)
     {
-        //
+        $request->validate(
+          [
+            'name' => 'required|string|max:255|unique:requirements,name,'.$requirement->id,
+            'description' => 'max:255'
+          ],
+          [
+            'name.required' => 'Rellena este campo obligatorio',
+            'name.unique' => 'Este nombre ya esta tomado'
+          ]
+        );
+        $requirement->update($request->all());
+        return redirect()->route('admin.requirements.index')->notice('El requisito se actualizo correctamente', 'alert');
     }
 
     /**

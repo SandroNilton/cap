@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Areas;
 use App\Models\Area;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
-use Illuminate\Http\Request;
 
 class Edit extends Component
 {

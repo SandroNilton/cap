@@ -116,7 +116,7 @@ class CustomerTable extends DataTableComponent
                 ->html(),
             Column::make('Acciones')
                 ->label(
-                  fn($row, Column $column) => view('admin.categories.actions')->withRow($row)
+                  fn($row, Column $column) => view('admin.customers.actions')->withRow($row)
                 ),
         ];
     }

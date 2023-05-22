@@ -61,10 +61,6 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        $request->validate([
-          'name' => 'required|string|max:255',
-          'description' => 'max:255',
-        ]);
         $request->validate(
           [
             'name' => 'required|string|max:255|unique:areas,name,'.$area->id,
