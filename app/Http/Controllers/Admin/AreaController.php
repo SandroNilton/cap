@@ -53,7 +53,7 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        //
+        return view('admin.areas.edit');
     }
 
     /**
@@ -61,7 +61,22 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        //
+        $request->validate([
+          'name' => 'required|string|max:255',
+          'description' => 'max:255',
+        ]);
+        $request->validate(
+          [
+            'name' => 'required|string|max:255|unique:areas,name,'.$area->id,
+            'description' => 'max:255'
+          ],
+          [
+            'name.required' => 'Rellena este campo obligatorio',
+            'name.unique' => 'Este nombre ya esta tomado'
+          ]
+        );
+        $area->update($request->all());
+        return redirect()->route('admin.areas.index')->notice('El área se actualizo correctamente', 'alert');
     }
 
     /**
