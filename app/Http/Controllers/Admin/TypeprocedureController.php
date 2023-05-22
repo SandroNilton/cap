@@ -53,7 +53,7 @@ class TypeprocedureController extends Controller
      */
     public function edit(Typeprocedure $typeprocedure)
     {
-        //
+        return view('admin.areas.edit');
     }
 
     /**
