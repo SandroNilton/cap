@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -69,7 +70,7 @@ class UserController extends Controller
           ]
         );
 
-        User::create([
+        $user = User::create([
           'type' => 9,
           'code' => $this->generateUniqueCode(),
           'name' => $request->name,
@@ -80,6 +81,8 @@ class UserController extends Controller
           'is_admin' => true,
           'password' => Hash::make($request->password)
         ]);
+
+        $user->roles()->sync($request->roles);
 
         return redirect()->route('admin.users.index')->notice('El usuario se creo correctamente', 'alert'); 
     }
@@ -97,6 +100,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $roles = Role::all();
         return view('admin.users.edit');
     }
 
@@ -121,6 +125,7 @@ class UserController extends Controller
           ]
         );
         $user->update($request->all());
+        $user->roles()->sync($request->roles);
         return redirect()->route('admin.users.index')->notice('El usuario se actualizo correctamente', 'alert');
     }
 

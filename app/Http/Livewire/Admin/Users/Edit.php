@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Users;
 use App\Models\User;
 use App\Models\Area;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
 use Livewire\Component;
 
 class Edit extends Component
@@ -12,6 +13,7 @@ class Edit extends Component
     public $user;
     public $areas;
     public $user_data;
+    public $roles;
 
     public function mount()
     {
@@ -26,6 +28,7 @@ class Edit extends Component
 
     public function render()
     {   
+        $this->roles = Role::all();
         $this->user_data = User::where([['id', '=', $this->user->id]])->get();
         $this->areas = Area::where('state', '=', 1)->get();
         return view('livewire.admin.users.edit');

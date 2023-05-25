@@ -29,7 +29,7 @@
                   </div>
                 @endforeach
               </div>
-              {!! Form::submit('Actualizar rol', ['class' => 'bg-[#42a692] px-2 mb-3 rounded text-white text-sm py-1.5 hover:bg-[#2c6f62] transition duration-300']) !!}
+              {!! Form::submit('Actualizar rol', ['class' => 'cursor-pointer bg-[#42a692] px-2 mb-3 rounded text-white text-sm py-1.5 hover:bg-[#2c6f62] transition duration-300']) !!}
             {!! Form::close() !!}
             @can('admin.areas.destroy')
               <button wire:click="deleteRole({{ $role_data[0]->id }})" class="bg-[#C83232] px-2 rounded text-white text-sm py-1.5 transition duration-300"> Eliminar área</button>
