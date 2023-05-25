@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('administrator_id')->nullable();
             $table->longText('description')->nullable();
             $table->string('action');
-            $table->boolean('state')->default(1);
+            $table->integer('state')->default(1);
             $table->timestamps();
         });
     }
