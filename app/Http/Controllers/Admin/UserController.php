@@ -71,7 +71,7 @@ class UserController extends Controller
         );
 
         $user = User::create([
-          'type' => 9,
+          'type' => 10,
           'code' => $this->generateUniqueCode(),
           'name' => $request->name,
           'email' => $request->email,
