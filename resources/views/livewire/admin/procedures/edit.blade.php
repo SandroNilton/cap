@@ -29,7 +29,7 @@
           </div>
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Tipo de trámite:</span>
-            <span>{{ $procedure->typeprocedure->name }}</span>
+            <span>{{ $procedure_data[0]->typeprocedure->name }}</span>
           </div>
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Área:</span>
@@ -38,7 +38,7 @@
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Tipo usuario:</span>
             <span>
-              @switch($procedure->user->type)
+              @switch($procedure_data[0]->user->type)
                 @case(1)
                     Natural
                   @break
@@ -56,13 +56,13 @@
           </div>
           <div class="mb-3 text-sm flex gap-x-3">
             <span>Nombre usuario:</span>
-            <span>{{ $procedure->user->name }}</span>
+            <span>{{ $procedure_data[0]->user->name }}</span>
           </div>
           <div class="text-sm flex gap-x-3">
             <span>Detalle:</span>
             <span>
-              @if (!empty($procedure->description))
-                <p>{{ $procedure->description }}</p>
+              @if (!empty($procedure_data[0]->description))
+                <p>{{ $procedure_data[0]->description }}</p>
               @else
                 <p> -- </p>
               @endif
@@ -180,7 +180,7 @@
                     <div class="text-xs mb-0.5 w-44 truncate" title="{{ $procedure_file->name }}">{{ $procedure_file->name }}</div>
                     <div class="flex gap-x-3">
                       <form wire:submit.prevent="changeStateFile({{ $procedure_file->id }}, {{ $procedure_file->state }})" class="flex w-full gap-x-3">
-                        <select wire:model="state_id" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
+                        <select id="{{ $procedure_file->id }}" wire:model="state_id" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
                           <option value="1" @if($procedure_file->state == 1) @selected(true) @else @selected(false) @endif>Sin verificar</option>
                           <option value="2" @if($procedure_file->state == 2) @selected(true) @else @selected(false) @endif>Aceptado</option>
                           <option value="3" @if($procedure_file->state == 3) @selected(true) @else @selected(false) @endif>Rechazado</option>

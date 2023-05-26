@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('requirement_id');
             $table->string('name')->nullable();
             $table->string('file')->nullable();
-            $table->boolean('state')->default(1);
+            $table->integer('state')->default(1);
             $table->timestamps();
         });
     }

@@ -127,11 +127,12 @@ class Edit extends Component
       );
 
       if($this->procedure->administrator_id != $this->user_id){
-        Procedure::where('id', '=', $this->procedure->id)->update(['administrator_id' => $this->user_id]);
+        $user_get_area = User::where('id', '=', $this->user_id)->get();
+        Procedure::where('id', '=', $this->procedure->id)->update(array('administrator_id' => $this->user_id, 'area_id' => $user_get_area[0]->area_id));        
         Procedurehistory::create([
           'procedure_id' => $this->procedure->id,
           'typeprocedure_id' => $this->procedure->typeprocedure_id,
-          'area_id' => $this->procedure->area_id,
+          'area_id' => $user_get_area[0]->area_id,
           'user_id' => $this->procedure->user_id,
           'administrator_id' => $this->user_id,
           'description' => $this->procedure->description,
@@ -167,7 +168,7 @@ class Edit extends Component
         $this->procedure_histories = Procedurehistory::where([['procedure_id', '=',  $this->procedure->id]])->get();
         $this->procedure_messages = Proceduremessage::where([['procedure_id', '=', $this->procedure->id]])->orderBy('created_at', 'desc')->get();
         $this->areas = Area::where('state', '=', 1)->get();
-        $this->users = User::where([['state', '=', 1], ['type', '=', 10]])->get();
+        $this->users = User::where([['state', '=', 1], ['type', '=', 10], ['id', '!=', 1]])->get();
         return view('livewire.admin.procedures.edit');
     }
 }
