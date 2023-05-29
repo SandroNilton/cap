@@ -179,8 +179,9 @@
                   <div class="flex-1">
                     <div class="text-xs mb-0.5 w-44 truncate" title="{{ $procedure_file->name }}">{{ $procedure_file->name }}</div>
                     <div class="flex gap-x-3">
-                      <form wire:submit.prevent="changeStateFile({{ $procedure_file->id }}, {{ $procedure_file->state }})" class="flex w-full gap-x-3">
-                        <select id="{{ $procedure_file->id }}" wire:model="state_id" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
+                      <form wire:submit.prevent="changeStateFile(Object.fromEntries(new FormData($event.target)))" class="flex w-full gap-x-3">
+                        <input type="hidden" name="procedurefile_id" value="{{ $procedure_file->id }}">
+                        <select id="{{ $procedure_file->id }}" name="state_id" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
                           <option value="1" @if($procedure_file->state == 1) @selected(true) @else @selected(false) @endif>Sin verificar</option>
                           <option value="2" @if($procedure_file->state == 2) @selected(true) @else @selected(false) @endif>Aceptado</option>
                           <option value="3" @if($procedure_file->state == 3) @selected(true) @else @selected(false) @endif>Rechazado</option>
@@ -206,7 +207,7 @@
     </div>
     <div class="w-full md:w-1/2 lg:w-1/3 px-2">
       <div class="bg-white rounded p-4">
-        <div class="flex w-full flex-col scrollbar overflow-y-scroll">
+        <div class="flex w-full flex-col scrollbar overflow-y-scroll h-52">
           <div class="items-center">
             <p class="text-sm font-poppins text-gray-600 mb-3">Historial:</p>
             <div class="flex text-sm gap-x-3">

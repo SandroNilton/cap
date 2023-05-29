@@ -146,16 +146,16 @@ class Edit extends Component
       }
     }
 
-    public function changeStateFile($id, $state)
+    public function changeStateFile($formData)
     {
-
-      if($this->state_id == NULL){
+      $file_get_state = Fileprocedure::where('id', '=', $formData['procedurefile_id'])->get();
+      if($formData['state_id'] == NULL){
         $this->notice('El archivo ya cuenta este estado', 'alert');
       } else {
-        if($state == $this->state_id){
+        if($file_get_state[0]->state == $formData['state_id']){
           $this->notice('El archivo ya cuenta este estado', 'alert');
         } else {
-          Fileprocedure::where('id', '=', $id)->update(['state' => $this->state_id]);
+          Fileprocedure::where('id', '=', $formData['procedurefile_id'])->update(['state' => $formData['state_id']]);
           $this->notice('Se actualizo el estado correctamente', 'alert');
         }
       }
