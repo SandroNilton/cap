@@ -25,6 +25,7 @@ class Edit extends Component
     public $state_id;
     public $procedure;
     public $procedure_data;
+    public $procedure_accepted;
 
     public function mount()
     {
@@ -163,6 +164,7 @@ class Edit extends Component
 
     public function render()
     {
+        $this->procedure_accepted = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '=', '1']])->orWhere([['procedure_id', '=', $this->procedure->id], ['state', '=', '3']])->get();
         $this->procedure_data = Procedure::where([['id', '=', $this->procedure->id]])->get();
         $this->procedure_files = Fileprocedure::where([['procedure_id', '=', $this->procedure->id]])->get();
         $this->procedure_histories = Procedurehistory::where([['procedure_id', '=',  $this->procedure->id]])->get();

@@ -206,7 +206,7 @@
       </div>
     </div>
     <div class="w-full md:w-1/2 lg:w-1/3 px-2">
-      <div class="bg-white rounded p-4">
+      <div class="bg-white rounded p-4 mb-4">
         <div class="flex w-full flex-col scrollbar overflow-y-scroll h-52">
           <div class="items-center">
             <p class="text-sm font-poppins text-gray-600 mb-3">Historial:</p>
@@ -268,6 +268,22 @@
             </li>
           @endforelse
         </div>
+      </div>
+      <div class="bg-white rounded p-4">
+        @if ($procedure_accepted->count() > 0)
+          <div class="text-sm">Para generar la opción de finalizacion de trámite por favor aceptar todos los archivos adjuntos.</div>
+        @else
+          <div>
+            <div class="items-center">
+              <p class="text-sm font-poppins text-gray-600 mb-3">Finalizar trámite:  @error('files_state') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
+              <div class="flex flex-col columns-1 grid-cols-1 text-sm gap-x-3">
+                <form action="">
+                  <input type="file" class="" multiple>
+                  <button type="submit" class="w-full p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">Finalizar</button>
+                </form>
+              </div>
+          </div>
+        @endif
       </div>  
     </div>
   </div>

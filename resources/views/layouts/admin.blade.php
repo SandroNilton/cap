@@ -25,8 +25,8 @@
         [
           'id' => 'panel-avanzado',
           'title' => 'Panel avanzado',
-          'url' => route('admin.dashboard'),
-          'active' => request()->routeIs('admin.dashboard'),
+          'url' => route('admin.advanced-dashboard'),
+          'active' => request()->routeIs('admin.advanced-dashboard'),
           'icon' => 'home-outline',
           'can' => 'admin.dashboard.index'
         ],
