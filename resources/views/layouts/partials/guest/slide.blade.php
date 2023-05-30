@@ -31,4 +31,4 @@
       }
     }
   </style>
-@endpush
+@endpush  

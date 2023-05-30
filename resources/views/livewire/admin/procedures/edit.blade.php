@@ -275,10 +275,11 @@
         @else
           <div>
             <div class="items-center">
-              <p class="text-sm font-poppins text-gray-600 mb-3">Finalizar trámite:  @error('files_state') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
+              <p class="text-sm text-gray-600 mb-3">Finalizar trámite:  @error('files_state') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
               <div class="flex flex-col columns-1 grid-cols-1 text-sm gap-x-3">
                 <form action="">
-                  <input type="file" class="" multiple>
+                  <label for="" class="text-sm text-gray-600 mb-3">Adjuntar archivos de respuesta</label>
+                  <input type="file" class="py-3" multiple class="text-[#183247] w-full bg-white py-1.5 px-3.5 relative m-0 block flex-auto cursor-pointer rounded border border-[#cfd7df] hover:border-[#42a692] transition-all bg-clip-padding text-sm duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded file:border-0 file:border-solid file:border-inherit file:bg-[#42a692] file:text-white file:px-3 file:py-[0.32rem] file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] focus:outline-none">
                   <button type="submit" class="w-full p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">Finalizar</button>
                 </form>
               </div>
