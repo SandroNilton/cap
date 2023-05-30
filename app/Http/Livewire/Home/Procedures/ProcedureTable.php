@@ -65,6 +65,6 @@ class ProcedureTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Procedure::query()->where('user_id', '=', auth()->id())->whereDate('procedures.created_at', '>=', now()->subDays(30)->endofDay())->orderBy('created_at', 'desc');
+        return Procedure::query()->where('user_id', '=', auth()->id())->orderBy('created_at', 'desc');
     }
 }
