@@ -1,5 +1,5 @@
 <div class="flex">
-  @can('admin.areas.edit')
+  @can('admin.procedures.edit')
     <a class="rounded-sm text-sm py-0.5 px-1" href="{{ route('admin.procedures.edit', ['procedure' => $row->id ]) }}" title="Editar">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 43 43" fill="none">
         <rect x="0.104492" y="0.141602" width="42" height="42" rx="21" fill="#DDB542"/>
