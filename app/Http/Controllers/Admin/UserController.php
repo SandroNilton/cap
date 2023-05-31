@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $request->validate(
           [
-            'name' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|max:255|unique:users',
             'area_id' => 'required',
             'description' => 'max:255',
@@ -60,7 +60,6 @@ class UserController extends Controller
           ],
           [
             'name.required' => 'Rellena este campo obligatorio',
-            'name.unique' => 'Este nombre ya esta tomado',
             'email.required' => 'Rellena este campo obligatorio',
             'email.unique' => 'Este correo ya esta tomado',
             'area_id.required' => 'Seleccione este campo obligatorio',
