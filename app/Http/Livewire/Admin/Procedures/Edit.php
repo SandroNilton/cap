@@ -10,9 +10,12 @@ use App\Models\User;
 use App\Models\Fileprocedure;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Route;
+use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 class Edit extends Component
 {
+    use WithFileUploads;
 
     public $message;
     public $procedure_messages;
@@ -26,6 +29,8 @@ class Edit extends Component
     public $procedure;
     public $procedure_data;
     public $procedure_accepted;
+    public $file_finish = [];
+    public $message_finish;
 
     public function mount()
     {
@@ -160,6 +165,32 @@ class Edit extends Component
           $this->notice('Se actualizo el estado correctamente', 'alert');
         }
       }
+    }
+
+    public function finish_procedure()
+    {
+      Procedurehistory::create([
+        'procedure_id' => $this->procedure->id,
+        'typeprocedure_id' => $this->procedure->typeprocedure_id,
+        'area_id' => $this->procedure->area_id,
+        'user_id' => $this->procedure->user_id,
+        'administrator_id' => $this->procedure->administrator_id,
+        'description' => $this->procedure->description,
+        'action' => 'Finalizar tramite aceptado',
+        'state' => 5
+      ]);
+      $date = Carbon::now()->format('Y');
+      foreach ($this->file_finish as $file) {
+        $file_url = Storage::put('procedures/'.$date."/".$this->procedure->id."", $file);
+        Fileprocedure::create([
+          'procedure_id' => $this->procedure->id,
+          'requirement_id' => 0,
+          'name' => $file->GetClientOriginalName(),
+          'file' => (string)$file_url,
+          'state' => '4'
+        ]);
+      }
+      $this->notice('Trámite finalizado correctamente', 'alert');
     }
 
     public function render()
