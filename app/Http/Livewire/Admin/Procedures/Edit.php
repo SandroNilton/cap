@@ -31,6 +31,7 @@ class Edit extends Component
     public $procedure_accepted;
     public $file_finish = [];
     public $message_finish;
+    public $procedure_files_finish;
 
     public function mount()
     {
@@ -169,6 +170,7 @@ class Edit extends Component
 
     public function finish_procedure()
     {
+      Procedure::where('id', '=', $this->procedure->id)->update(['state' => 5]);
       Procedurehistory::create([
         'procedure_id' => $this->procedure->id,
         'typeprocedure_id' => $this->procedure->typeprocedure_id,
@@ -197,7 +199,8 @@ class Edit extends Component
     {
         $this->procedure_accepted = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '=', '1']])->orWhere([['procedure_id', '=', $this->procedure->id], ['state', '=', '3']])->get();
         $this->procedure_data = Procedure::where([['id', '=', $this->procedure->id]])->get();
-        $this->procedure_files = Fileprocedure::where([['procedure_id', '=', $this->procedure->id]])->get();
+        $this->procedure_files = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '!=', 4]])->get();
+        $this->procedure_files_finish = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '=', 4]])->get();;
         $this->procedure_histories = Procedurehistory::where([['procedure_id', '=',  $this->procedure->id]])->get();
         $this->procedure_messages = Proceduremessage::where([['procedure_id', '=', $this->procedure->id]])->orderBy('created_at', 'desc')->get();
         $this->areas = Area::where('state', '=', 1)->get();
