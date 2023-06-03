@@ -72,21 +72,24 @@
       </div>
       <div class="bg-white rounded p-4 mb-4">
         <div class="items-center">
-          <p class="text-sm font-poppins text-gray-600 mb-3">Agregar comentarios: @error('message') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
-          <div class="flex text-sm mb-3">
-            <form wire:submit.prevent="addMessage" class="flex w-full gap-x-3">
-              <div wire:loading wire:target="addMessage">
-                <div class="flex justify-center items-center h-full">
-                  <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
-                    <path class="fill-gray-200" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
-                    <path class="fill-[#42a692]" d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
-                  </svg>
+          <p class="text-sm font-poppins text-gray-600 mb-3">Comentarios: @error('message') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
+          @if ($procedure_data[0]->state == 5)
+          @else
+            <div class="flex text-sm mb-3">
+              <form wire:submit.prevent="addMessage" class="flex w-full gap-x-3">
+                <div wire:loading wire:target="addMessage">
+                  <div class="flex justify-center items-center h-full">
+                    <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
+                      <path class="fill-gray-200" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
+                      <path class="fill-[#42a692]" d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-              <input type="text" wire:model="message" name="message" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('message')) border-[#d72d30] @endif" placeholder="Ingrese un mensaje"/>
-              <button type="submit" class="bg-[#42a692] px-2 rounded text-white text-sm py-1 hover:bg-[#2c6f62] transition duration-300"">Enviar</button>
-            </form>
-          </div>
+                <input type="text" wire:model="message" name="message" class="rounded peer bg-transparent block w-full py-1.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0 @if($errors->has('message')) border-[#d72d30] @endif" placeholder="Ingrese un mensaje"/>
+                <button type="submit" class="bg-[#42a692] px-2 rounded text-white text-sm py-1 hover:bg-[#2c6f62] transition duration-300"">Enviar</button>
+              </form>
+            </div>
+          @endif
           <hr>
           <div class="mt-3 overflow-y-scroll scrollbar h-48">
             @forelse ($procedure_messages as $procedure_message)
@@ -111,34 +114,33 @@
     </div>
     <div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
       @if ($procedure_data[0]->state == 5)
-
-      <div class="bg-white rounded p-4 mb-4">
-        <div class="items-center">
-          <p class="text-sm font-poppins text-gray-600 mb-3">Archivos de respuesta:  @error('state_id') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
-          <div class="flex flex-col columns-1 grid-cols-1 text-sm gap-x-3">
-            @forelse ($procedure_files_finish as $procedure_file_finish)  
-              <li class="min-w-full border border-dashed border-[#2c6f62] transition duration-300 flex mb-2 rounded-md">
-                <div class="rounded-sm flex flex-1 items-center p-2.5 gap-x-3">
-                  <button wire:click="downloadFile({{ $procedure_file_finish->id }}, '{{ $procedure_file_finish->name }}', '{{ $procedure_file_finish->file }}')" class="flex flex-col rounded-sm w-7 h-7 bg-[#42a692] justify-center items-center cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>
-                  </button>
-                  <div class="flex-1">
-                    <div class="text-xs mb-0.5 w-44 truncate" title="{{ $procedure_file_finish->name }}">{{ $procedure_file_finish->name }}</div>
+        <div class="bg-white rounded p-4 mb-4">
+          <div class="items-center">
+            <p class="text-sm font-poppins text-gray-600 mb-3">Archivos de respuesta:  @error('state_id') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
+            <div class="flex flex-col columns-1 grid-cols-1 text-sm gap-x-3">
+              @forelse ($procedure_files_finish as $procedure_file_finish)  
+                <li class="min-w-full border border-dashed border-[#2c6f62] transition duration-300 flex mb-2 rounded-md">
+                  <div class="rounded-sm flex flex-1 items-center p-2.5 gap-x-3">
+                    <button wire:click="downloadFile({{ $procedure_file_finish->id }}, '{{ $procedure_file_finish->name }}', '{{ $procedure_file_finish->file }}')" class="flex flex-col rounded-sm w-8 h-11 bg-[#42a692] justify-center items-center cursor-pointer">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                      </svg>
+                    </button>
+                    <div class="flex-1">
+                      <div class="text-xs mb-0.5 w-44 truncate" title="{{ $procedure_file_finish->name }}">{{ $procedure_file_finish->name }}</div>
+                    </div>
+                  </div> 
+                </li>
+              @empty
+                <li class="w-full border border-dashed border-[#2c6f62] transition duration-300 flex flex-row rounded-md">
+                  <div class="rounded-sm w-full flex p-2.5 justify-center">
+                    <span class="text-xs ">Sin adjuntado de finalización</span>
                   </div>
-                </div> 
-              </li>
-            @empty
-              <li class="w-full border border-dashed border-[#2c6f62] transition duration-300 flex flex-row rounded-md">
-                <div class="rounded-sm w-full flex p-2.5 justify-center">
-                  <span class="text-xs ">Sin adjuntado de finalización</span>
-                </div>
-              </li>
-            @endforelse
+                </li>
+              @endforelse
+            </div>
           </div>
         </div>
-      </div>
       @else
         @can('admin.procedures.assign_area')
           <div class="bg-white rounded p-4 mb-4">
@@ -209,19 +211,22 @@
 
                   <div class="flex-1">
                     <div class="text-xs mb-0.5 w-44 truncate" title="{{ $procedure_file->name }}">{{ $procedure_file->name }}</div>
-                    <div class="flex gap-x-3">
-                      <form wire:submit.prevent="changeStateFile(Object.fromEntries(new FormData($event.target)))" class="flex w-full gap-x-3">
-                        <input type="hidden" name="procedurefile_id" value="{{ $procedure_file->id }}">
-                        <select id="{{ $procedure_file->id }}" name="state_id" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
-                          <option value="1" @if($procedure_file->state == 1) @selected(true) @else @selected(false) @endif>Sin verificar</option>
-                          <option value="2" @if($procedure_file->state == 2) @selected(true) @else @selected(false) @endif>Aceptado</option>
-                          <option value="3" @if($procedure_file->state == 3) @selected(true) @else @selected(false) @endif>Rechazado</option>
-                        </select>
-                        <button class="p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">
-                          Asignar
-                        </button>
-                      </form>
-                    </div>
+                    @if ($procedure_data[0]->state == 5)
+                    @else
+                      <div class="flex gap-x-3">
+                        <form wire:submit.prevent="changeStateFile(Object.fromEntries(new FormData($event.target)))" class="flex w-full gap-x-3">
+                          <input type="hidden" name="procedurefile_id" value="{{ $procedure_file->id }}">
+                          <select id="{{ $procedure_file->id }}" name="state_id" class="text-[#183247] rounded peer bg-transparent block w-full py-0.5 text-sm border-[#cfd7df] hover:border-[#42a692] transition duration-300 focus:border-[#42a692] focus:outline-none focus:ring-0">
+                            <option value="1" @if($procedure_file->state == 1) @selected(true) @else @selected(false) @endif>Sin verificar</option>
+                            <option value="2" @if($procedure_file->state == 2) @selected(true) @else @selected(false) @endif>Aceptado</option>
+                            <option value="3" @if($procedure_file->state == 3) @selected(true) @else @selected(false) @endif>Rechazado</option>
+                          </select>
+                          <button class="p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">
+                            Asignar
+                          </button>
+                        </form>
+                      </div>
+                    @endif
                   </div>
                 </div> 
               </li>
@@ -300,30 +305,34 @@
           @endforelse
         </div>
       </div>
-      <div class="bg-white rounded p-4">
-        @if ($procedure_accepted->count() > 0)
-          <div class="text-sm">Para generar la opción de finalizacion de trámite por favor aceptar todos los archivos adjuntos.</div>
-        @else
-          <div>
-            <div class="items-center">
-              <p class="text-sm font-poppins text-gray-600 mb-3">Finalizar trámite: @error('finish') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
-              <div class="text-sm mb-3">
-                <form wire:submit.prevent="finish_procedure" class="w-full gap-x-3">
-                  <div wire:loading wire:target="finish_procedure">
-                    <div class="flex justify-center items-center h-full">
-                      <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
-                        <path class="fill-gray-200" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
-                        <path class="fill-[#42a692]" d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
-                      </svg>
+      @if ($procedure_data[0]->state == 5)
+      @else
+        <div class="bg-white rounded p-4">
+          @if ($procedure_accepted->count() > 0)
+            <div class="text-sm">Para generar la opción de finalizacion de trámite por favor aceptar todos los archivos adjuntos.</div>
+          @else
+            <div>
+              <div class="items-center">
+                <p class="text-sm font-poppins text-gray-600 mb-3">Finalizar trámite: @error('finish') <span class="px-3 text-xs scale-75 text-[#d72d30] mb-0 mt-0.5">{{ $message }}</span> @enderror</p>
+                <div class="text-sm mb-3">
+                  <form wire:submit.prevent="finish_procedure" class="w-full gap-x-3">
+                    <div wire:loading wire:target="finish_procedure">
+                      <div class="flex justify-center items-center h-full">
+                        <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
+                          <path class="fill-gray-200" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
+                          <path class="fill-[#42a692]" d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                  <input type="file" wire:model="file_finish" class="py-3" multiple class="text-[#183247] w-full bg-white py-1.5 px-3.5 relative m-0 block flex-auto cursor-pointer rounded border border-[#cfd7df] hover:border-[#42a692] transition-all bg-clip-padding text-sm duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded file:border-0 file:border-solid file:border-inherit file:bg-[#42a692] file:text-white file:px-3 file:py-[0.32rem] file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] focus:outline-none">
-                  <button type="submit" class="w-full p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">Finalizar</button>
-                </form>
+                    <input type="file" wire:model="file_finish" class="py-3" multiple class="text-[#183247] w-full bg-white py-1.5 px-3.5 relative m-0 block flex-auto cursor-pointer rounded border border-[#cfd7df] hover:border-[#42a692] transition-all bg-clip-padding text-sm duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded file:border-0 file:border-solid file:border-inherit file:bg-[#42a692] file:text-white file:px-3 file:py-[0.32rem] file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] focus:outline-none">
+                    <button type="submit" class="w-full p-0.5 px-2 bg-[#42a692] rounded text-white text-sm hover:bg-[#2c6f62] transition duration-300">Finalizar</button>
+                  </form>
+                </div>
               </div>
-          </div>
-        @endif
-      </div>  
+            </div>  
+          @endif
+        </div>
+      @endif
     </div>
   </div>
 </div>
