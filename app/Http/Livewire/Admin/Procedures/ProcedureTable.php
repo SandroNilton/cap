@@ -14,6 +14,7 @@ use App\Exports\AreasExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Procedure;
 use App\Models\Procedurehistory;
+use App\Models\User;
 
 class ProcedureTable extends DataTableComponent
 {
@@ -122,7 +123,8 @@ class ProcedureTable extends DataTableComponent
         if(auth()->user()->hasRole('admin')) {
           return Procedure::query()->orderBy('created_at', 'desc');
         } else {
-          return Procedure::query()->where('procedures.area_id', '=', auth()->user()->area_id)->where('is_admin', '=', 1)->orderBy('created_at', 'desc');
+          $this->area_user_login = User::where([['id', '=', auth()->user()->id]])->get();
+          return Procedure::query()->where('procedures.area_id', '=', $this->area_user_login[0]->state)->where('is_admin', '=', 1)->orderBy('created_at', 'desc');
         }
     }
 }
