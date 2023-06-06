@@ -108,7 +108,7 @@ class ProcedureTable extends DataTableComponent
             Column::make("Fecha de creación", "created_at")
                 ->sortable()
                 ->format(
-                  fn($value, $row, Column $column) => ''.$row->created_at->format('d/m/Y H:i').''
+                  fn($value, $row, Column $column) => ''.auth()->user()->id.$row->created_at->format('d/m/Y H:i').''
                 )
                 ->html(),
             Column::make('Acciones')
