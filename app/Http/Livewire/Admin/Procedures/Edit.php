@@ -200,7 +200,7 @@ class Edit extends Component
         $this->procedure_accepted = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '=', '1']])->orWhere([['procedure_id', '=', $this->procedure->id], ['state', '=', '3']])->get();
         $this->procedure_data = Procedure::where([['id', '=', $this->procedure->id]])->get();
         $this->procedure_files = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '!=', 4]])->get();
-        $this->procedure_files_finish = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '=', 4]])->get();;
+        $this->procedure_files_finish = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '=', 4]])->get();
         $this->procedure_histories = Procedurehistory::where([['procedure_id', '=',  $this->procedure->id]])->get();
         $this->procedure_messages = Proceduremessage::where([['procedure_id', '=', $this->procedure->id]])->orderBy('created_at', 'desc')->get();
         $this->areas = Area::where('state', '=', 1)->get();

@@ -71,9 +71,9 @@ class ProcedureController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Procedure $procedure)
     {
-        //
+        return view('home.procedures.show');
     }
 
     /**
@@ -81,7 +81,7 @@ class ProcedureController extends Controller
      */
     public function edit(string $id)
     {
-        return view('home.procedures.edit');
+        //
     }
 
     /**
