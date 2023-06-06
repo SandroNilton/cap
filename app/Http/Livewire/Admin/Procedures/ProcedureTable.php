@@ -124,7 +124,7 @@ class ProcedureTable extends DataTableComponent
           return Procedure::query()->orderBy('created_at', 'desc');
         } else {
           $this->area_user_login = User::where([['id', '=', auth()->user()->id]])->get();
-          return Procedure::query()->where('procedures.area_id', '=', $this->area_user_login[0]->state)->where('is_admin', '=', 1)->orderBy('created_at', 'desc');
+          return Procedure::query()->where('procedures.area_id', '=', $this->area_user_login[0]->area_id)->where('is_admin', '=', 1)->orderBy('created_at', 'desc');
         }
     }
 }
