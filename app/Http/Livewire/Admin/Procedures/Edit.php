@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Procedures;
 use Livewire\Component;
 use App\Models\Procedurehistory;
 use App\Models\Proceduremessage;
+use App\Models\Proceduremessagefinish;
 use App\Models\Procedure;
 use App\Models\Area;
 use App\Models\User;
@@ -31,6 +32,7 @@ class Edit extends Component
     public $procedure_accepted;
     public $file_finish = [];
     public $message_finish;
+    public $procedure_message_finish;
     public $procedure_files_finish;
 
     public function mount()
@@ -170,7 +172,21 @@ class Edit extends Component
 
     public function finish_procedure()
     {
+      $this->validate(
+        [
+          'message_finish' => 'required',
+          'file_finish' => 'required'
+        ],
+        [
+          'file_finish.required' => 'Seleccione archivos de respuesta',
+          'message_finish.required' => 'Rellena este campo obligatorio',
+        ]
+      );
       Procedure::where('id', '=', $this->procedure->id)->update(['state' => 5]);
+      Proceduremessagefinish::create([
+        'procedure_id' => $this->procedure->id,
+        'description' => $this->message_finish,
+      ]);
       Procedurehistory::create([
         'procedure_id' => $this->procedure->id,
         'typeprocedure_id' => $this->procedure->typeprocedure_id,
@@ -201,6 +217,7 @@ class Edit extends Component
         $this->procedure_data = Procedure::where([['id', '=', $this->procedure->id]])->get();
         $this->procedure_files = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '!=', 4]])->get();
         $this->procedure_files_finish = Fileprocedure::where([['procedure_id', '=', $this->procedure->id], ['state', '=', 4]])->get();
+        $this->procedure_message_finish = Proceduremessagefinish::where([['procedure_id', '=', $this->procedure->id]])->get();
         $this->procedure_histories = Procedurehistory::where([['procedure_id', '=',  $this->procedure->id]])->get();
         $this->procedure_messages = Proceduremessage::where([['procedure_id', '=', $this->procedure->id]])->orderBy('created_at', 'desc')->get();
         $this->areas = Area::where('state', '=', 1)->get();
