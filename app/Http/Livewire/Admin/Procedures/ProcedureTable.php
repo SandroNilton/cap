@@ -108,7 +108,7 @@ class ProcedureTable extends DataTableComponent
             Column::make("Fecha de creación", "created_at")
                 ->sortable()
                 ->format(
-                  fn($value, $row, Column $column) => ''.auth()->user()->id.$row->created_at->format('d/m/Y H:i').''
+                  fn($value, $row, Column $column) => ''.$row->created_at->format('d/m/Y H:i').''
                 )
                 ->html(),
             Column::make('Acciones')
@@ -123,8 +123,7 @@ class ProcedureTable extends DataTableComponent
         if(auth()->user()->hasRole('admin')) {
           return Procedure::query()->orderBy('created_at', 'desc');
         } else {
-          $this->area_user_login = User::where([['id', '=', auth()->user()->id]])->get();
-          return Procedure::query()->where('procedures.area_id', '=', $this->area_user_login[0]->area_id)->where('is_admin', '=', 1)->orderBy('created_at', 'desc');
+          return Procedure::query()->where('procedures.area_id', '=', auth()->user()->area_id)->orderBy('created_at', 'desc');
         }
     }
 }
